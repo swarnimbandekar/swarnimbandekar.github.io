@@ -25,9 +25,31 @@ function readingTime(content: string): string {
 }
 
 const tocItems = headings.filter(h => h.depth <= 4);
+
+const articleMeta = {
+  publishedTime: date.toISOString(),
+  author: 'swarnimbandekar',
+  tags,
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  author: {
+    '@type': 'Person',
+    name: 'swarnimbandekar',
+    url: 'https://swarnimbandekar.in',
+  },
+  datePublished: date.toISOString(),
+  image: cover ? new URL(cover, 'https://swarnimbandekar.in').href : undefined,
+  url: Astro.url.href,
+  keywords: tags.join(', '),
+};
 ---
 
-<BaseLayout title={title} description={description} wide={true}>
+<BaseLayout title={title} description={description} wide={true} article={articleMeta} jsonLd={jsonLd}>
   <article class="post-layout">
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">

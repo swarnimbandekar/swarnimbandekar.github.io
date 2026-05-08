@@ -9,6 +9,13 @@ interface Props {
   ogImage?: string;
   canonicalURL?: string;
   wide?: boolean;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    tags?: string[];
+  };
+  jsonLd?: Record<string, any>;
 }
 
 const {
@@ -17,6 +24,8 @@ const {
   ogImage = '/static/og.png',
   canonicalURL = Astro.url.href,
   wide = false,
+  article,
+  jsonLd,
 } = Astro.props;
 
 const siteTitle = 'swarnimbandekar';
@@ -40,14 +49,24 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={new URL(ogImage, Astro.site)} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={article ? 'article' : 'website'} />
   <meta property="og:site_name" content={siteTitle} />
   <meta property="og:url" content={canonicalURL} />
+
+  {article?.publishedTime && <meta property="article:published_time" content={article.publishedTime} />}
+  {article?.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime} />}
+  {article?.author && <meta property="article:author" content={article.author} />}
+  {article?.tags?.map((tag: string) => <meta property="article:tag" content={tag} />)}
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+  <meta name="author" content="swarnimbandekar" />
+  {article?.tags && <meta name="keywords" content={article.tags.join(', ')} />}
+
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
