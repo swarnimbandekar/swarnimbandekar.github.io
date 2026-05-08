@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/logo.jpg';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const postsByYear = posts.reduce((acc, post) => {
+  const year = post.data.date.getFullYear().toString();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {} as Record<string, typeof posts>);
+
+const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+
+function formatDate(d: Date): string {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function readingTime(content: string): string {
+  const words = content.split(/\s+/).length;
+  const minutes = Math.ceil(words / 200);
+  return `${minutes} min read`;
+}
+---
+
+<BaseLayout title="Blog" description="All blog posts — CTF writeups, vulnerability research, malware analysis, and security deep-dives.">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs">
+    <a href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
+    <span class="bc-sep">›</span>
+    <a href="/blog">Blog</a>
+    <span class="bc-sep">›</span>
+    <span>Page 1</span>
+  </nav>
+
+  {years.map((year) => (
+    <section class="year-group">
+      <h2 class="year-label">{year}</h2>
+      {postsByYear[year].map((post) => (
+        <a href={`/blog/${post.id.replace(/\.mdx?$/, '')}`} class="post-card">
+          {post.data.cover && (
+            <Image src={post.data.cover} alt={post.data.title} width={240} height={160} class="post-card-image" loading="lazy" />
+          )}
+          <div class="post-card-content">
+            <h3 class="post-card-title">{post.data.title}</h3>
+            <p class="post-card-desc">{post.data.description}</p>
+            <div class="post-card-meta">
+              <Image src={logoImg} alt="avatar" width={20} height={20} style="border-radius: 50%; object-fit: cover;" />
+              <span>swarnimbandekar</span>
+              <span class="sep">|</span>
+              <span>{formatDate(post.data.date)}</span>
+              <span class="sep">|</span>
+              <span>{readingTime(post.body ?? '')}</span>
+            </div>
+            {post.data.tags.length > 0 && (
+              <div class="post-card-tags">
+                {post.data.tags.map((tag: string) => (
+                  <span class="tag"><span class="tag-hash">#</span> {tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </a>
+      ))}
+    </section>
+  ))}
+</BaseLayout>
