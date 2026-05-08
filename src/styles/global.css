@@ -792,6 +792,12 @@ html.light .theme-toggle .icon-moon {
   padding-left: 1.25rem;
 }
 
+.toc-depth-4 {
+  font-size: 0.75rem;
+  padding-left: 2rem;
+  color: var(--text-dim);
+}
+
 .post-content {
   min-width: 0;
 }

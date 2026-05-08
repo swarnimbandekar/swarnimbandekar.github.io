@@ -24,7 +24,7 @@ function readingTime(content: string): string {
   return `${minutes} min read`;
 }
 
-const tocItems = headings.filter(h => h.depth <= 3);
+const tocItems = headings.filter(h => h.depth <= 4);
 ---
 
 <BaseLayout title={title} description={description} wide={true}>
