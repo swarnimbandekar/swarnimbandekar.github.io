@@ -1,5 +1,5 @@
 ---
-title: "ReConCTF26 Writeups"
+title: "ReConCTF 26 Writeups"
 description: "writeups for ReCon CTF 2026, including detailed solutions for Misc, Web, and other challenges."
 date: 2026-05-09
 tags: ["ctf", "writeups", "reconctf26"]
