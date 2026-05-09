@@ -7,10 +7,10 @@ cover: "/static/covers/breachpointimg.jpeg"
 draft: false
 ---
 
-## Brechpoint CTF writeups - pixy:swarnimbandekar
+# BreachPoint CTF writeups - pixy:swarnimbandekar
 
-### 1. Binary Exploitation
- #### TheRustyFrame
+## 1. Binary Exploitation
+### TheRustyFrame
  
 >This challenge lives at the boundary where Rust’s guarantees stop being global and start being situational. Memory safety exists — but only where the program believes it does.
 Execution is shaped by runtime state, structural layout decisions, and deliberate transformations applied before memory interaction. Several paths are valid. Some are convincing. None are accidental.
@@ -63,15 +63,15 @@ else:
 
 p.close()
 ```
-![image](https://hackmd.io/_uploads/rJpwaplOZl.png)
+![image](/static/blog/breachpointctf26/rJpwaplOZl.png)
 
 
 Flag: BPCTF{stand_proud_mate}
 
 ---
 
-### 2. OSINT
-#### Find the IP
+## 2. OSINT
+### Find the IP
 
 >Find Me and Submit the Flag
 >https://files.ctf7.com/media/challenge_attachments/looks.png
@@ -82,8 +82,8 @@ Flag: BPCTF{78.186.26.188}
 
 ---
 
-### 3. Reverse Engineering
-#### PhantomEngine
+## 3. Reverse Engineering
+### PhantomEngine
 
 >This engine seems broken. It keeps telling me "Wrong" even when I'm sure I have the right seed. Maybe there's a ghost in the machine?
 >Or maybe... just maybe... you need to fix the engine to make it run.
@@ -142,15 +142,15 @@ if __name__ == "__main__":
     solve_phantom()
 ```
 
-![image](https://hackmd.io/_uploads/SyIqlRe_bl.png)
+![image](/static/blog/breachpointctf26/SyIqlRe_bl.png)
 
 
 Flag: BPCTF{phantom_runtime_engine}
 
 ---
 
-### 4. Cryptography
-#### The Trojan War
+## 4. Cryptography
+### The Trojan War
 
 >The city sleeps beneath a veil of shadows, yet the echoes of the past whisper through the marble halls. Forgotten scrolls lie scattered, their secrets waiting for one daring enough to read between the lines.
 >A prince once wandered these streets, leaving behind a trail of riddles and symbols that only the cleverest mind could decipher. Each step brings you closer to the hidden truth, but only those who can see the patterns in chaos will glimpse the prize.
@@ -215,7 +215,7 @@ except:
     print(flag.hex())
 
 ```
-![image](https://hackmd.io/_uploads/Hkyhf0e_Wg.png)
+![image](/static/blog/breachpointctf26/Hkyhf0e_Wg.png)
 
 https://drive.google.com/file/d/1BaxcxVDaPGCqRo9AFVh90AzaCE6hU42r/view?usp=drive_link
 
@@ -225,7 +225,7 @@ put that in cyberchef ROT13
 
 Flag: BPCTF{H3l3n_15_R3tr13v3d!!!}
 
-#### Rolling Silence
+### Rolling Silence
 
 >ChallengeCrypto2 — Rolling Silence
 >A stripped ELF64 binary that seems silent and harmless — no input, no visible output, no stored key. But something does happen at runtime. The flag is hidden behind a rolling transformation where each step depends on the last it's not as quiet as it looks. Reverse it, follow the state changes, and uncover the flag. good luck!
@@ -268,14 +268,14 @@ for i, byte in enumerate(encrypted_data):
 
 print(f"[+] FLAG: {flag}")
 ```
-![image](https://hackmd.io/_uploads/r1xMYCgdWl.png)
+![image](/static/blog/breachpointctf26/r1xMYCgdWl.png)
 
 Flag: BPCTF{registers_are_state}
 
 ---
 
-### 5. AI/ML
-#### The Whispering Walls of Troy
+## 5. AI/ML
+### The Whispering Walls of Troy
 
 >Long before the age of silicon, the walls of Troy stood unbreachable—not merely because of their stone, but because the city possessed a secret: the Palladium, a sacred statue that whispered warnings of every enemy plot. The Trojans trusted it utterly, for it never spoke falsely. Yet the Greeks discovered that the Palladium could be tricked: if approached with the right sequence of words, it would reveal its own hidden nature.
 >Today, that legend lives on in Palladium Secure, a modern AI guardian built into a simple chat app. It has memorized countless exchanges—greetings, status reports, refusals—but buried deep in its neural circuits is one particular conversation it learned by heart: the story of how Troy fell. The AI will never speak of it unprompted; it only recites the tale when the conversation flows in exactly the same pattern as the day it first heard the legend.
@@ -285,13 +285,13 @@ Flag: BPCTF{registers_are_state}
 
 Had given an apk, tried putting some text in and got random replies, got fed up and decompiled the apk and put it in antigravity with claud opus 4.6
 
-![image](https://hackmd.io/_uploads/ByKcjAld-e.png)
+![image](/static/blog/breachpointctf26/ByKcjAld-e.png)
 
 Flag: BPCTF{Sh13ld_Br34ch3d_By_N33dl3}
 
 ---
 
-### Feedback
+## Feedback
 no proper description, challs were being removed, I was trying WEB3 around morning 4-5am, files werent uploaded, and then later on other files were added. REST ALL G.
 
 swarnimbandekar

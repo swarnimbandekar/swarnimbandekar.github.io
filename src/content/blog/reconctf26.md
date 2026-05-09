@@ -23,7 +23,7 @@ The intended way to solve this challenge is to break this video into `multiple f
 
 1. get multiple frames of this video from any tool online, I would say [ezgif](https://ezgif.com/video-to-jpg) with a 30 fps (frames per second)
 2. you see a bunch of hexahue blocks in sequence, then find a decoder for that or go to [dcode.fr](https://www.dcode.fr/hexahue-cipher)
-3. Then you match each one of them in a sequence and decrypt ![image](https://hackmd.io/_uploads/BJ71-Ti0-g.png)
+3. Then you match each one of them in a sequence and decrypt ![image](/static/blog/reconctf26/BJ71-Ti0-g.png)
 
 
 Flag: `recon{G1I7CHED,R3C0NN}`
@@ -39,8 +39,8 @@ Description has some words such as `server` `color` `badge` these directly hint 
 
 1. craft a discord invite url https://discord.gg/HZHRDzujwX
 2. you are landed into the recon server. The challenge title says `out of sight, in scope` and when you combine this with the description you get an idea of discord roles which arent visible to your eyes, nor they have been given to any of the users on the server.
-3. you can get the hidden role either using a mod ![WhatsApp Image 2026-04-21 at 10.44.50 PM](https://hackmd.io/_uploads/BkcFB6i0Wl.jpg)
-4. without mod `/id @rec` ![image](https://hackmd.io/_uploads/BkqhSasC-x.png)
+3. you can get the hidden role either using a mod ![WhatsApp Image 2026-04-21 at 10.44.50 PM](/static/blog/reconctf26/BkcFB6i0Wl.jpg)
+4. without mod `/id @rec` ![image](/static/blog/reconctf26/BkqhSasC-x.png)
 
 Flag: `recon{y0u_M16h7_b3_A_D3ve10P3r_gngg!!!!!!}`
 
@@ -54,9 +54,9 @@ Flag: `recon{y0u_M16h7_b3_A_D3ve10P3r_gngg!!!!!!}`
 
 when you open the website you see all pages are working other but only `team.html` page was showing a `404` which says the page has been removed. There is a p cool wayback called [Web Archive](https://web.archive.org/) where stores all the snapshots of a the website.
 
-1. go to https://web.archive.org/ and search for the broken url in there `https://dev-recon.vercel.app/team.html` ![image](https://hackmd.io/_uploads/SJQqDasAWe.png)
+1. go to https://web.archive.org/ and search for the broken url in there `https://dev-recon.vercel.app/team.html` ![image](/static/blog/reconctf26/SJQqDasAWe.png)
 2. you see the email of the intern is `iworkatrecon@outlook.com` then you run a `sherlock` on that username or you can also think a popular place where interns mess-up `https://github.com/iworkatrecon/`
-3. in github you get a repo named `secret-infra` in which you scroll into commit history and see `.env` with whitespace, go to any [whitespace decoder](https://www.dcode.fr/whitespace-language) online. ![image](https://hackmd.io/_uploads/B1hgcTsAZl.png)
+3. in github you get a repo named `secret-infra` in which you scroll into commit history and see `.env` with whitespace, go to any [whitespace decoder](https://www.dcode.fr/whitespace-language) online. ![image](/static/blog/reconctf26/B1hgcTsAZl.png)
 4. You finally get the flag at https://pastebin.com/7EMdVHeW
 
 Flag: `recon{aRch1V3_wA5_7h3_vu1N_8774821}`
@@ -67,7 +67,7 @@ Flag: `recon{aRch1V3_wA5_7h3_vu1N_8774821}`
 Last seen ghosting calls and roaming the streets like he owns the place. You’ve got eyes on the scene. Now prove you know the map better than him. Pick the spot where he’s hiding… or keep wandering like Lamar.
 
 This challenge was picked up from https://gtaguessr.com/
-You can look out for the location there, or another option was to load GTA-V in free roam mode and search for the location :wink: ![image](https://hackmd.io/_uploads/rJeYJRiRbg.png)
+You can look out for the location there, or another option was to load GTA-V in free roam mode and search for the location :wink: ![image](/static/blog/reconctf26/rJeYJRiRbg.png)
 
 Flag: `recon{4hH!!_y3aH_y0u_f0un6_fR4nk1in}`
 
@@ -80,9 +80,9 @@ Flag: `recon{4hH!!_y3aH_y0u_f0un6_fR4nk1in}`
 
 once you login to the website, your account is at $29 and you have to buy the conference pass worth $99
 1. if you apply the coupon `FREEPASS` it shows has reached the maximim limit.
-2. capture request through burp suite and add multiple copies to repeater and group them together and send a prallel attack (race condition) ![image](https://hackmd.io/_uploads/B16sWRj0bx.png)
+2. capture request through burp suite and add multiple copies to repeater and group them together and send a prallel attack (race condition) ![image](/static/blog/reconctf26/B16sWRj0bx.png)
 3. Now when you come back to the website and check you will be having excess money $$$$
-4. as the flag was dynamic, each team gets different flag.![image_2_69](https://hackmd.io/_uploads/Sk-VX0oRWe.png)
+4. as the flag was dynamic, each team gets different flag.![image_2_69](/static/blog/reconctf26/Sk-VX0oRWe.png)
  
 Flag: `recon{dynamic}`
 
@@ -185,7 +185,7 @@ if __name__ == "__main__":
 
 ```
 
-![image](https://hackmd.io/_uploads/Syu49Ai0bx.png)
+![image](/static/blog/reconctf26/Syu49Ai0bx.png)
 
 
 Flag: `recon{t00K_n0_loN6_ T0_pU1L__!}`
@@ -444,7 +444,7 @@ if __name__ == '__main__':
     solve(a.host, a.port)
 
 ```
-![image](https://hackmd.io/_uploads/BkUD2CsAZg.png)
+![image](/static/blog/reconctf26/BkUD2CsAZg.png)
 
 Flag: recon{dynamic}
 
@@ -560,7 +560,7 @@ if __name__ == "__main__":
 
 ```
 
-![image](https://hackmd.io/_uploads/HJ0-R0iRWe.png)
+![image](/static/blog/reconctf26/HJ0-R0iRWe.png)
 
 Flag: `recon{dynamic}`
 
