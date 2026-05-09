@@ -12,10 +12,16 @@ dist/
 # IDE
 .vscode/
 .idea/
+.claude/
+.agents/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Claude
+claude.md
+skill.md
 
 # Temp
 _astro_temp/

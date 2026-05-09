@@ -15,10 +15,10 @@ draft: false
 >Corrupted? Maybe.
 Or maybe you forgot how to read.
 
-You were given a mp4 video that was looked like a glitch video.
+You were given an mp4 video that looked like a glitch video.
 [Download Video](https://github.com/swarnimbandekar/reconctf2026/raw/refs/heads/main/misc/0xDEADBEEF.mp4/0xDEADBEEF.mp4)
 
-Many of you solved this challenge only when the hints were given, well "⬡" that referred to a "hexa" and colorful "hue" boxes that you were getting in the video was a [Hexahue](https://www.dcode.fr/hexahue-cipher).
+Many of you solved this challenge only when the hints were given. The "⬡" referred to "hexa" and the colorful "hue" boxes that you were getting in the video was a [Hexahue](https://www.dcode.fr/hexahue-cipher).
 The intended way to solve this challenge is to break this video into `multiple frames`. As any video out there is a bunch full of images running in sequence. Playing this video in a video player would be the worst decision that you would ever take.
 
 1. get multiple frames of this video from any tool online, I would say [ezgif](https://ezgif.com/video-to-jpg) with a 30 fps (frames per second)
@@ -34,8 +34,8 @@ Flag: `recon{G1I7CHED,R3C0NN}`
 >No badge, no name, no colored frame
 still running half the server’s game.
 
-I genuninly felt this one was a bit tricky one, because I took this challenge from 0xfun ctf when I had to solve this challenge and I had fun solving this.
-Description has some words such as `server` `color` `badge` these directly hint to discord (sorry if you have never heard about it)
+I genuinely felt this one was a bit tricky, because I took this challenge from 0xfun ctf when I had to solve it and I had fun solving this.
+The description has some words such as `server`, `color`, and `badge` — these directly hint to Discord (sorry if you have never heard about it).
 
 1. craft a discord invite url https://discord.gg/HZHRDzujwX
 2. you are landed into the recon server. The challenge title says `out of sight, in scope` and when you combine this with the description you get an idea of discord roles which arent visible to your eyes, nor they have been given to any of the users on the server.
@@ -52,11 +52,11 @@ Flag: `recon{y0u_M16h7_b3_A_D3ve10P3r_gngg!!!!!!}`
 >Recon wasn’t always what it is now.
 >https://dev-recon.vercel.app/
 
-when you open the website you see all pages are working other but only `team.html` page was showing a `404` which says the page has been removed. There is a p cool wayback called [Web Archive](https://web.archive.org/) where stores all the snapshots of a the website.
+When you open the website, you see all pages are working other than the `team.html` page, which was showing a `404` saying the page has been removed. There is a pretty cool Wayback Machine called [Web Archive](https://web.archive.org/) that stores all the snapshots of the website.
 
 1. go to https://web.archive.org/ and search for the broken url in there `https://dev-recon.vercel.app/team.html` ![image](/static/blog/reconctf26/SJQqDasAWe.png)
-2. you see the email of the intern is `iworkatrecon@outlook.com` then you run a `sherlock` on that username or you can also think a popular place where interns mess-up `https://github.com/iworkatrecon/`
-3. in github you get a repo named `secret-infra` in which you scroll into commit history and see `.env` with whitespace, go to any [whitespace decoder](https://www.dcode.fr/whitespace-language) online. ![image](/static/blog/reconctf26/B1hgcTsAZl.png)
+2. you see the intern's email is `iworkatrecon@outlook.com`, then you run a `sherlock` on that username, or you can also look at a popular place where interns mess up — `https://github.com/iworkatrecon/`
+3. on GitHub, you get a repo named `secret-infra` in which you scroll through the commit history and see `.env` with whitespace. Go to any [whitespace decoder](https://www.dcode.fr/whitespace-language) online. ![image](/static/blog/reconctf26/B1hgcTsAZl.png)
 4. You finally get the flag at https://pastebin.com/7EMdVHeW
 
 Flag: `recon{aRch1V3_wA5_7h3_vu1N_8774821}`
@@ -81,7 +81,7 @@ Flag: `recon{4hH!!_y3aH_y0u_f0un6_fR4nk1in}`
 once you login to the website, your account is at $29 and you have to buy the conference pass worth $99
 1. if you apply the coupon `FREEPASS` it shows has reached the maximim limit.
 2. capture request through burp suite and add multiple copies to repeater and group them together and send a prallel attack (race condition) ![image](/static/blog/reconctf26/B16sWRj0bx.png)
-3. Now when you come back to the website and check you will be having excess money $$$$
+3. Now, when you come back to the website and check, you will have excess money $$$$
 4. as the flag was dynamic, each team gets different flag.![image_2_69](/static/blog/reconctf26/Sk-VX0oRWe.png)
  
 Flag: `recon{dynamic}`
@@ -92,7 +92,7 @@ Flag: `recon{dynamic}`
 Sometimes, it’s just a series of perfectly reasonable decisions — each one harmless on its own.
 Until they aren’t.
 
-Iliterally took me one whole day to make this challenge.
+I literally took me one whole day to make this challenge.
 once you register and login, check the page source, there's a comment leaking `/api/user?id=USERID`
 
 1. hit `/api/user?id=1` and you get admin's email: `admin@sideeffects.local`
