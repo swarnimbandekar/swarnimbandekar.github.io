@@ -1,0 +1,401 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Not Found">
+  <div class="notfound">
+    <div class="notfound-content">
+      <div class="notfound-glitch" data-text="404">404</div>
+      <p class="notfound-msg">page not found — play while you're here.</p>
+
+      <div class="game-wrap">
+        <canvas id="game" width="600" height="200"></canvas>
+        <div class="game-hud">
+          <span id="score">SCORE: 0</span>
+          <span id="hi">HI: 0</span>
+        </div>
+        <p class="game-hint" id="hint">[ SPACE / TAP to jump ]</p>
+      </div>
+
+      <a href="/" class="notfound-back">
+        <span class="notfound-arrow">&larr;</span> back to safety
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .notfound {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 200px);
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .notfound-content {
+      max-width: 620px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .notfound-glitch {
+      font-family: var(--font-mono);
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      position: relative;
+      line-height: 1;
+      animation: flicker 3s infinite;
+    }
+
+    .notfound-glitch::before,
+    .notfound-glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+    }
+
+    .notfound-glitch::before {
+      color: #ff0040;
+      animation: glitch-shift 2.5s infinite;
+      clip-path: inset(0 0 60% 0);
+    }
+
+    .notfound-glitch::after {
+      color: #00ffcc;
+      animation: glitch-shift 2.5s infinite reverse;
+      clip-path: inset(60% 0 0 0);
+    }
+
+    @keyframes glitch-shift {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-3px, 1px); }
+      94% { transform: translate(3px, -1px); }
+      96% { transform: translate(-2px, -1px); }
+      98% { transform: translate(2px, 1px); }
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96% { opacity: 0.4; }
+      97% { opacity: 1; }
+      98% { opacity: 0.6; }
+    }
+
+    .notfound-msg {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.03em;
+      margin: 0;
+    }
+
+    .game-wrap {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    #game {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: block;
+      cursor: pointer;
+      image-rendering: pixelated;
+    }
+
+    .game-hud {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.4rem 0.2rem 0;
+      letter-spacing: 0.06em;
+    }
+
+    .game-hint {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin: 0.2rem 0 0;
+      animation: blink-hint 1.2s ease-in-out infinite;
+    }
+
+    @keyframes blink-hint {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .notfound-back {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .notfound-back:hover {
+      border-color: var(--accent);
+      background: rgba(70, 211, 105, 0.06);
+    }
+
+    .notfound-arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .notfound-back:hover .notfound-arrow {
+      transform: translateX(-3px);
+    }
+  </style>
+
+  <script is:inline>
+  (function () {
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('score');
+    const hiEl = document.getElementById('hi');
+    const hintEl = document.getElementById('hint');
+
+    const W = 600, H = 200;
+    const GROUND = H - 30;
+    const GRAVITY = 0.6;
+    const JUMP_FORCE = -10;
+
+    const isDark = document.documentElement.classList.contains('dark') || !document.documentElement.classList.contains('light');
+    const FG = isDark ? '#46d369' : '#16a34a';
+    const BG = isDark ? '#0a0a0a' : '#fafafa';
+    const DIM = isDark ? '#1a1a1a' : '#e5e5e5';
+    const MUTED = isDark ? '#333' : '#ccc';
+
+    let player = { x: 60, y: GROUND, w: 16, h: 20, vy: 0, grounded: true };
+    let obstacles = [];
+    let particles = [];
+    let score = 0;
+    let hi = parseInt(localStorage.getItem('404hi') || '0', 10);
+    let speed = 3.5;
+    let frame = 0;
+    let running = false;
+    let dead = false;
+    let spawnTimer = 0;
+
+    hiEl.textContent = 'HI: ' + hi;
+
+    function reset() {
+      player.y = GROUND;
+      player.vy = 0;
+      player.grounded = true;
+      obstacles = [];
+      particles = [];
+      score = 0;
+      speed = 3.5;
+      frame = 0;
+      spawnTimer = 0;
+      dead = false;
+      running = true;
+      hintEl.style.display = 'none';
+    }
+
+    function jump() {
+      if (dead) { reset(); return; }
+      if (!running) { reset(); return; }
+      if (player.grounded) {
+        player.vy = JUMP_FORCE;
+        player.grounded = false;
+      }
+    }
+
+    function spawnObstacle() {
+      const h = 14 + Math.random() * 20;
+      const isDouble = Math.random() > 0.7;
+      obstacles.push({ x: W, y: GROUND - h + player.h, w: 12, h: h });
+      if (isDouble) {
+        obstacles.push({ x: W + 22, y: GROUND - (10 + Math.random() * 16) + player.h, w: 10, h: 10 + Math.random() * 16 });
+      }
+    }
+
+    function addParticles(x, y) {
+      for (let i = 0; i < 8; i++) {
+        particles.push({
+          x, y,
+          vx: (Math.random() - 0.5) * 4,
+          vy: (Math.random() - 0.8) * 3,
+          life: 20 + Math.random() * 15,
+        });
+      }
+    }
+
+    function collides(a, b) {
+      return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+    }
+
+    function update() {
+      if (!running || dead) return;
+
+      frame++;
+      score = Math.floor(frame / 6);
+      speed = 3.5 + score * 0.005;
+
+      scoreEl.textContent = 'SCORE: ' + score;
+
+      // player physics
+      player.vy += GRAVITY;
+      player.y += player.vy;
+      if (player.y >= GROUND) {
+        player.y = GROUND;
+        player.vy = 0;
+        player.grounded = true;
+      }
+
+      // obstacles
+      spawnTimer--;
+      if (spawnTimer <= 0) {
+        spawnObstacle();
+        spawnTimer = 70 + Math.random() * 60 - Math.min(score * 0.3, 30);
+      }
+
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        obstacles[i].x -= speed;
+        if (obstacles[i].x + obstacles[i].w < 0) {
+          obstacles.splice(i, 1);
+          continue;
+        }
+        if (collides(player, obstacles[i])) {
+          dead = true;
+          running = false;
+          addParticles(player.x + player.w / 2, player.y + player.h / 2);
+          if (score > hi) {
+            hi = score;
+            localStorage.setItem('404hi', hi);
+          }
+          hiEl.textContent = 'HI: ' + hi;
+          hintEl.textContent = '[ SPACE / TAP to restart ]';
+          hintEl.style.display = 'block';
+        }
+      }
+
+      // particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].x += particles[i].vx;
+        particles[i].y += particles[i].vy;
+        particles[i].vy += 0.15;
+        particles[i].life--;
+        if (particles[i].life <= 0) particles.splice(i, 1);
+      }
+    }
+
+    function draw() {
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, W, H);
+
+      // ground line
+      ctx.strokeStyle = DIM;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, GROUND + player.h + 2);
+      ctx.lineTo(W, GROUND + player.h + 2);
+      ctx.stroke();
+
+      // ground dashes
+      ctx.strokeStyle = MUTED;
+      ctx.lineWidth = 0.5;
+      const dashOffset = running ? (frame * speed) % 20 : 0;
+      for (let x = -dashOffset; x < W; x += 20) {
+        ctx.beginPath();
+        ctx.moveTo(x, GROUND + player.h + 6);
+        ctx.lineTo(x + 8, GROUND + player.h + 6);
+        ctx.stroke();
+      }
+
+      // player — hacker cursor '>'
+      ctx.fillStyle = FG;
+      ctx.font = 'bold 22px monospace';
+      ctx.textBaseline = 'bottom';
+      const blink = !dead && frame % 40 < 30;
+      if (blink || dead) {
+        ctx.fillText('>', player.x, player.y + player.h);
+      }
+
+      // obstacles — rendered as terminal blocks
+      ctx.fillStyle = FG;
+      for (const o of obstacles) {
+        ctx.globalAlpha = 0.8;
+        for (let row = 0; row < o.h; row += 6) {
+          const chars = Math.ceil(o.w / 6);
+          for (let c = 0; c < chars; c++) {
+            ctx.font = '6px monospace';
+            ctx.fillText('#', o.x + c * 6, o.y + row + 6);
+          }
+        }
+        ctx.globalAlpha = 1.0;
+      }
+
+      // particles
+      for (const p of particles) {
+        ctx.globalAlpha = p.life / 35;
+        ctx.fillStyle = FG;
+        ctx.fillRect(p.x, p.y, 2, 2);
+      }
+      ctx.globalAlpha = 1.0;
+
+      // dead overlay
+      if (dead) {
+        ctx.fillStyle = FG;
+        ctx.font = '14px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('SEGFAULT — score: ' + score, W / 2, H / 2 - 10);
+        ctx.textAlign = 'start';
+      }
+
+      // start screen
+      if (!running && !dead) {
+        ctx.fillStyle = FG;
+        ctx.font = '13px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('$ ./run_game', W / 2, H / 2 - 10);
+        ctx.textAlign = 'start';
+      }
+    }
+
+    function loop() {
+      update();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    // input
+    document.addEventListener('keydown', function (e) {
+      if (e.code === 'Space' || e.code === 'ArrowUp') {
+        e.preventDefault();
+        jump();
+      }
+    });
+    canvas.addEventListener('click', jump);
+    canvas.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+      jump();
+    }, { passive: false });
+
+    loop();
+  })();
+  </script>
+</BaseLayout>
