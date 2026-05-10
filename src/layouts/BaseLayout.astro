@@ -92,74 +92,62 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
   <!-- Hacker Cursor Effect -->
   <script is:inline>
     (function() {
-      // Only enable on devices with mouse
-      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-
       const cursor = document.createElement('div');
       cursor.className = 'hacker-cursor';
       cursor.innerHTML = '<div class="hacker-cursor-dot"></div><div class="hacker-cursor-ring"></div>';
-      cursor.style.left = '-100px';
-      cursor.style.top = '-100px';
       document.body.appendChild(cursor);
 
       const trailsContainer = document.createElement('div');
       trailsContainer.className = 'cursor-trails';
       document.body.appendChild(trailsContainer);
 
-      const trailCount = 12;
+      const trailCount = 15;
       const trails = [];
 
       for (let i = 0; i < trailCount; i++) {
         const trail = document.createElement('div');
         trail.className = 'hacker-cursor-trail';
-        trail.style.opacity = (1 - i / trailCount) * 0.7;
-        trail.style.left = '-100px';
-        trail.style.top = '-100px';
+        trail.style.opacity = (1 - i / trailCount) * 0.5;
+        trail.style.transform = `scale(${1 - i / trailCount})`;
         trailsContainer.appendChild(trail);
-        trails.push({ el: trail, x: -100, y: -100 });
+        trails.push({ el: trail, x: 0, y: 0 });
       }
 
-      let mouseX = -100, mouseY = -100;
-      let cursorX = -100, cursorY = -100;
-      let isVisible = false;
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
 
       document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        if (!isVisible) {
-          isVisible = true;
-          cursor.style.opacity = '1';
-          trailsContainer.style.opacity = '1';
-        }
       });
 
+      // Hide cursor when leaving window
       document.addEventListener('mouseout', () => {
         cursor.style.opacity = '0';
         trailsContainer.style.opacity = '0';
-        isVisible = false;
       });
 
       document.addEventListener('mouseover', () => {
-        if (mouseX > 0) {
-          cursor.style.opacity = '1';
-          trailsContainer.style.opacity = '1';
-          isVisible = true;
-        }
+        cursor.style.opacity = '1';
+        trailsContainer.style.opacity = '1';
       });
 
       function animate() {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
+        // Smooth follow
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
 
         cursor.style.left = cursorX + 'px';
         cursor.style.top = cursorY + 'px';
 
+        // Update trails with delay
         for (let i = 0; i < trails.length; i++) {
+          const delay = i * 2;
           const targetX = i === 0 ? cursorX : trails[i - 1].x;
           const targetY = i === 0 ? cursorY : trails[i - 1].y;
 
-          trails[i].x += (targetX - trails[i].x) * (0.25 - i * 0.015);
-          trails[i].y += (targetY - trails[i].y) * (0.25 - i * 0.015);
+          trails[i].x += (targetX - trails[i].x) * (0.2 - i * 0.01);
+          trails[i].y += (targetY - trails[i].y) * (0.2 - i * 0.01);
 
           trails[i].el.style.left = trails[i].x + 'px';
           trails[i].el.style.top = trails[i].y + 'px';
@@ -170,6 +158,7 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
 
       animate();
 
+      // Update cursor color based on theme
       function updateCursorColor() {
         const isDark = document.documentElement.classList.contains('dark');
         const color = isDark ? '#46d369' : '#15803d';
@@ -178,6 +167,7 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
 
       updateCursorColor();
 
+      // Listen for theme changes
       const observer = new MutationObserver(updateCursorColor);
       observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     })();
@@ -250,92 +240,6 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
         localStorage.setItem('theme', 'dark');
       }
     });
-  </script>
-
-  <script is:inline>
-    (function() {
-      // Skip on touch devices
-      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-
-      // Create cursor element
-      var cursor = document.createElement('div');
-      cursor.className = 'hacker-cursor';
-      cursor.innerHTML = '<div class="hacker-cursor-dot"></div><div class="hacker-cursor-ring"></div>';
-      document.body.appendChild(cursor);
-
-      // Create trail container
-      var trailBox = document.createElement('div');
-      trailBox.className = 'cursor-trails';
-      document.body.appendChild(trailBox);
-
-      var mx = -100, my = -100;
-      var cx = -100, cy = -100;
-      var trails = [];
-      var MAX_TRAILS = 8;
-      var trailIdx = 0;
-
-      // Pre-create trail dots
-      for (var i = 0; i < MAX_TRAILS; i++) {
-        var dot = document.createElement('div');
-        dot.className = 'hacker-cursor-trail';
-        dot.style.opacity = '0';
-        trailBox.appendChild(dot);
-        trails.push({ el: dot, x: -100, y: -100 });
-      }
-
-      document.addEventListener('mousemove', function(e) {
-        mx = e.clientX;
-        my = e.clientY;
-      });
-
-      // Show/hide on enter/leave
-      document.addEventListener('mouseenter', function() {
-        cursor.style.opacity = '1';
-      });
-      document.addEventListener('mouseleave', function() {
-        cursor.style.opacity = '0';
-        for (var i = 0; i < trails.length; i++) {
-          trails[i].el.style.opacity = '0';
-        }
-      });
-
-      var lastTrailTime = 0;
-
-      function tick() {
-        // Smooth follow
-        cx += (mx - cx) * 0.15;
-        cy += (my - cy) * 0.15;
-        cursor.style.left = cx + 'px';
-        cursor.style.top = cy + 'px';
-
-        // Spawn trail dots
-        var now = Date.now();
-        if (now - lastTrailTime > 40) {
-          var t = trails[trailIdx % MAX_TRAILS];
-          t.x = cx;
-          t.y = cy;
-          t.el.style.left = cx - 3 + 'px';
-          t.el.style.top = cy - 3 + 'px';
-          t.el.style.opacity = '0.5';
-          t.birth = now;
-          trailIdx++;
-          lastTrailTime = now;
-        }
-
-        // Fade trail dots
-        for (var i = 0; i < trails.length; i++) {
-          if (trails[i].birth) {
-            var age = now - trails[i].birth;
-            var op = Math.max(0, 0.5 - age / 400);
-            trails[i].el.style.opacity = op;
-          }
-        }
-
-        requestAnimationFrame(tick);
-      }
-
-      tick();
-    })();
   </script>
 </body>
 </html>
