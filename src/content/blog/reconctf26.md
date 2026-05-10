@@ -7,6 +7,8 @@ cover: "/static/covers/reconctf26.JPG"
 draft: false
 ---
 
+import { Image } from 'astro:assets';
+
 # ReCon CTF 2026 writeups - swarnimbandekar
 
 ## 1. Misc
