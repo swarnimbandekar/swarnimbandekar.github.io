@@ -240,6 +240,19 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
         localStorage.setItem('theme', 'dark');
       }
     });
+
+    // Header scroll effect
+    const header = document.querySelector('.site-header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
+    }, { passive: true });
   </script>
 </body>
 </html>
