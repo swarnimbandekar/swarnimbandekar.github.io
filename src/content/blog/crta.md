@@ -61,7 +61,7 @@ Honestly? It was a rollercoaster. Early wins gave me confidence, but the middle 
 
 I passed with a 100% score - finished the entire exam in about 1 hour 30 minutes out of the 6 hours allotted. Honestly, I didn't expect to clear it that fast. Once the pieces started falling into place, the momentum just carried me through. Every enumeration step fed into the next, and before I knew it, I had all the answers.
 
-[Certificate Credentials](https://labs.cyberwarfare.live/credential/achievement/6a0f16fc561ddc10b08dceeb) - https://labs.cyberwarfare.live/credential/achievement/6a0f16fc561ddc10b08dceeb
+<a href="https://labs.cyberwarfare.live/credential/achievement/6a0f16fc561ddc10b08dceeb" target="_blank" rel="noopener noreferrer">Certificate Credentials</a> - https://labs.cyberwarfare.live/credential/achievement/6a0f16fc561ddc10b08dceeb
 
 ## Final Thoughts
 
