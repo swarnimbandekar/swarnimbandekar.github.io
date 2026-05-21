@@ -61,6 +61,8 @@ Honestly? It was a rollercoaster. Early wins gave me confidence, but the middle 
 
 I passed with a 100% score - finished the entire exam in about 1 hour 30 minutes out of the 6 hours allotted. Honestly, I didn't expect to clear it that fast. Once the pieces started falling into place, the momentum just carried me through. Every enumeration step fed into the next, and before I knew it, I had all the answers.
 
+[Certificate Credentials](https://labs.cyberwarfare.live/credential/achievement/6a0f16fc561ddc10b08dceeb) - https://labs.cyberwarfare.live/credential/achievement/6a0f16fc561ddc10b08dceeb
+
 ## Final Thoughts
 
 The CRTA exam is a solid test of practical offensive security skills. It doesn't just check if you can run tools - it checks if you can think through problems, chain findings together, and maintain composure when things don't go as planned. Finishing in a fraction of the allotted time with a perfect score felt incredible - a real validation of the hours spent practicing and building methodology.
