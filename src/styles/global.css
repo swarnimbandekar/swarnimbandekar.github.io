@@ -712,6 +712,24 @@ html.light .theme-toggle .icon-moon {
   font-family: var(--font-mono);
 }
 
+.footer-pages {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footer-pages a {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  transition: color 0.15s ease;
+}
+
+.footer-pages a:hover {
+  color: var(--accent);
+}
+
 /* ----- Post Layout (3-Column Grid) ----- */
 .post-layout {
   display: grid;

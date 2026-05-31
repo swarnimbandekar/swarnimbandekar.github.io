@@ -36,6 +36,17 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
 <html lang="en" class="dark">
 <head>
   <meta charset="utf-8" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-80TXY3SN27"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-80TXY3SN27');
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content={Astro.generator} />
 
@@ -222,6 +233,12 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
             RSS
           </a>
         </div>
+        <nav class="footer-pages">
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-conditions">Terms &amp; Conditions</a>
+        </nav>
         <span class="footer-copy">&copy; {new Date().getFullYear()} swarnimbandekar</span>
       </div>
     </footer>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Terms & Conditions" description="Terms and conditions for using swarnimbandekar.">
+  <div class="about-content">
+    <div class="page-header">
+      <h1 class="page-title">Terms &amp; Conditions</h1>
+    </div>
+
+    <div class="prose">
+      <p><em>Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</em></p>
+
+      <p>
+        By accessing this website, you agree to the following terms. If you do not agree, please discontinue use.
+      </p>
+
+      <h2>Educational Use Only</h2>
+      <p>
+        All security content, writeups, and tools published here are for <strong>educational and research purposes only</strong>. Do not use any techniques described on systems you do not own or lack explicit authorization to test. You are solely responsible for your actions.
+      </p>
+
+      <h2>No Warranty</h2>
+      <p>
+        Content is provided "as is" without warranty of any kind. The author is not liable for any damages arising from the use of information or code published on this site.
+      </p>
+
+      <h2>Intellectual Property</h2>
+      <p>
+        Articles and original content are the property of the author. You may share and reference them with proper attribution, but may not republish them as your own.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        These terms may be updated at any time. Continued use of the site constitutes acceptance of the current terms.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
