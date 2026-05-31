@@ -5,6 +5,15 @@ date: 2026-05-21
 tags: ["crta", "crta review", "certified red team analyst", "crta certification", "crtp", "red-team", "active-directory", "cybersecurity"]
 cover: "/static/covers/crta.png"
 draft: false
+faq:
+  - q: "What is the CRTA certification?"
+    a: "CRTA stands for Certified Red Team Analyst, a hands-on offensive security certification covering web exploitation and Active Directory attacks."
+  - q: "Is the CRTA exam hard?"
+    a: "It is challenging but fair. With solid enumeration skills and AD fundamentals, the CRTA exam is very passable."
+  - q: "Is CRTA worth it for beginners?"
+    a: "Yes. For its price and practical format, the CRTA certification is one of the best value red team certs in cybersecurity today."
+  - q: "How long is the CRTA exam?"
+    a: "You get six hours to compromise the environment and reach domain admin."
 ---
 
 # CRTA Exam Experience

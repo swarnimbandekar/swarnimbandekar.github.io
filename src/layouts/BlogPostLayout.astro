@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { post, headings, prevPost, nextPost } = Astro.props;
-const { title, description, date, tags, cover } = post.data;
+const { title, description, date, tags, cover, faq } = post.data;
 
 function formatDate(d: Date): string {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -47,9 +47,21 @@ const jsonLd = {
   url: Astro.url.href,
   keywords: tags.join(', '),
 };
+
+const faqLd = faq?.length && {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const schema = faqLd ? [jsonLd, faqLd] : jsonLd;
 ---
 
-<BaseLayout title={title} description={description} wide={true} article={articleMeta} jsonLd={jsonLd} ogImage={cover}>
+<BaseLayout title={title} description={description} wide={true} article={articleMeta} jsonLd={schema} ogImage={cover}>
   <article class="post-layout">
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">
