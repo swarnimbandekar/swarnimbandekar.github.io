@@ -1,8 +1,8 @@
 ---
-title: "CRTA Exam Experience"
-description: "My attempt at the Certified Red Team Analyst (CRTA) exam - a hands-on, Active Directory focused assessment."
+title: "CRTA Review: Certified Red Team Analyst Exam Experience"
+description: "Honest CRTA review and exam experience - how I passed the Certified Red Team Analyst (CRTA) exam with 100%. Is the CRTA certification worth it vs CRTP?"
 date: 2026-05-21
-tags: ["certification", "crta", "red-team", "active-directory"]
+tags: ["crta", "crta review", "certified red team analyst", "crta certification", "crtp", "red-team", "active-directory", "cybersecurity"]
 cover: "/static/covers/crta.png"
 draft: false
 ---
@@ -68,3 +68,39 @@ I passed with a 100% score - finished the entire exam in about 1 hour 30 minutes
 The CRTA exam is a solid test of practical offensive security skills. It doesn't just check if you can run tools - it checks if you can think through problems, chain findings together, and maintain composure when things don't go as planned. Finishing in a fraction of the allotted time with a perfect score felt incredible - a real validation of the hours spent practicing and building methodology.
 
 Would I recommend it? Absolutely. It's the kind of exam that makes you grow, but yeah I didn't pay for it, I won this at some CTF.
+
+---
+
+## CRTA Review: Is the Certified Red Team Analyst Certification Worth It?
+
+If you landed here searching for an honest CRTA review, here's my take. The Certified Red Team Analyst (CRTA) certification by CyberWarfare Labs is one of the most practical entry points into red teaming. Unlike multiple-choice tests, the CRTA exam is fully hands-on, dropping you into a live Active Directory environment where you chain web exploitation, internal pivoting, and domain compromise. For anyone serious about offensive security and a career in cybersecurity, the CRTA certification delivers real value.
+
+So, is CRTA worth it? In my opinion, yes - especially if you want a budget-friendly, lab-based credential that proves you can actually operate, not just memorize. It builds the methodology and mindset you need before moving on to heavier certifications like CRTP (Certified Red Team Professional).
+
+## How to Pass the CRTA Exam
+
+Based on my CRTA exam experience, here is how to pass the CRTA exam:
+
+- **Master enumeration first.** Most of the CRTA exam is won during recon. Enumerate every service, read JavaScript bundles, and inspect API endpoints carefully.
+- **Practice Active Directory attacks.** Understand Kerberos, credential reuse, lateral movement, and privilege escalation paths to domain admin.
+- **Take detailed notes.** Track every host, credential, and finding - they connect like a chain.
+- **Stay calm under time pressure.** You get six hours; methodical beats fast - I finished in about 1.5 hours.
+- **Build a repeatable methodology.** The exam rewards process over luck.
+
+## CRTA vs CRTP
+
+A common question in any CRTA exam review is how it compares to CRTP. The CRTA is more beginner-friendly and covers the full kill chain from web to AD, while CRTP dives deeper into Active Directory attack and defense. If you are new to red teaming, start with CRTA, then progress to CRTP as your skills mature. Together they form a strong cybersecurity learning path.
+
+## Frequently Asked Questions
+
+**What is the CRTA certification?**
+CRTA stands for Certified Red Team Analyst, a hands-on offensive security certification covering web exploitation and Active Directory attacks.
+
+**Is the CRTA exam hard?**
+It is challenging but fair. With solid enumeration skills and AD fundamentals, the CRTA exam is very passable.
+
+**Is CRTA worth it for beginners?**
+Yes. For its price and practical format, the CRTA certification is one of the best value red team certs in cybersecurity today.
+
+**How long is the CRTA exam?**
+You get six hours to compromise the environment and reach domain admin.
