@@ -4,7 +4,7 @@ description: "An ASCP review of my APIsec University exam experience, including 
 date: 2026-05-28
 tags: ["certification", "ascp", "ascp review", "ascp apisec", "apisec university", "api-security", "api-pentesting", "bugbounty"]
 cover: "/static/covers/ascp.png"
-draft: true
+draft: false
 ---
 
 # ASCP Review: My Journey with the **ASCP API Security Certified Professional** Exam
