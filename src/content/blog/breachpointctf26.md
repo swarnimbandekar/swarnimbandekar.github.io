@@ -7,7 +7,6 @@ cover: "/static/covers/breachpointimg.jpeg"
 draft: false
 ---
 
-
 # BreachPoint CTF writeups - pixy:swarnimbandekar
 
 ## 1. Binary Exploitation
