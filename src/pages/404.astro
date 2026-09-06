@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="404 — Not Found">
+<BaseLayout title="404 - Not Found">
   <div class="notfound">
     <div class="notfound-content">
       <div class="notfound-glitch" data-text="404">404</div>
-      <p class="notfound-msg">page not found — play while you're here.</p>
+      <p class="notfound-msg">page not found - play while you're here.</p>
 
       <div class="game-wrap">
         <canvas id="game" width="600" height="200"></canvas>
@@ -324,7 +324,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ctx.stroke();
       }
 
-      // player — hacker cursor '>'
+      // player - hacker cursor '>'
       ctx.fillStyle = FG;
       ctx.font = 'bold 22px monospace';
       ctx.textBaseline = 'bottom';
@@ -333,7 +333,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ctx.fillText('>', player.x, player.y + player.h);
       }
 
-      // obstacles — rendered as terminal blocks
+      // obstacles - rendered as terminal blocks
       ctx.fillStyle = FG;
       for (const o of obstacles) {
         ctx.globalAlpha = 0.8;
@@ -361,7 +361,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ctx.font = '14px monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('SEGFAULT — score: ' + score, W / 2, H / 2 - 10);
+        ctx.fillText('SEGFAULT - score: ' + score, W / 2, H / 2 - 10);
         ctx.textAlign = 'start';
       }
 

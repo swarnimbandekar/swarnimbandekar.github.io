@@ -1,6 +1,6 @@
 ---
 title: "BreachPoint CTF 2026 Writeups"
-description: "Writeups for BreachPoint CTF 2026 — binary exploitation, OSINT, reverse engineering, cryptography, and AI/ML challenges solved by pixy:swarnimbandekar."
+description: "Writeups for BreachPoint CTF 2026 - binary exploitation, OSINT, reverse engineering, cryptography, and AI/ML challenges solved by pixy:swarnimbandekar."
 date: 2026-03-30
 tags: ["ctf", "writeups"]
 cover: "/static/covers/breachpointimg.jpeg"
@@ -12,7 +12,7 @@ draft: false
 ## 1. Binary Exploitation
 ### TheRustyFrame
  
->This challenge lives at the boundary where Rust’s guarantees stop being global and start being situational. Memory safety exists — but only where the program believes it does.
+>This challenge lives at the boundary where Rust’s guarantees stop being global and start being situational. Memory safety exists - but only where the program believes it does.
 Execution is shaped by runtime state, structural layout decisions, and deliberate transformations applied before memory interaction. Several paths are valid. Some are convincing. None are accidental.
 
 Used python to solve this
@@ -154,7 +154,7 @@ Flag: BPCTF{phantom_runtime_engine}
 
 >The city sleeps beneath a veil of shadows, yet the echoes of the past whisper through the marble halls. Forgotten scrolls lie scattered, their secrets waiting for one daring enough to read between the lines.
 >A prince once wandered these streets, leaving behind a trail of riddles and symbols that only the cleverest mind could decipher. Each step brings you closer to the hidden truth, but only those who can see the patterns in chaos will glimpse the prize.
->Legends speak of a treasure that carries a name—ancient, enduring, and coveted. The wise call it helen. Those who seek it must follow the silent currents of knowledge, trusting logic over luck, patience over haste.
+>Legends speak of a treasure that carries a name-ancient, enduring, and coveted. The wise call it helen. Those who seek it must follow the silent currents of knowledge, trusting logic over luck, patience over haste.
 >The city waits. The puzzle is yours.
 >[rsa.py](https://files.ctf7.com/media/challenge_attachments/rsa.py)
 >[AES.py](https://files.ctf7.com/media/challenge_attachments/AES.py)
@@ -227,8 +227,8 @@ Flag: BPCTF{H3l3n_15_R3tr13v3d!!!}
 
 ### Rolling Silence
 
->ChallengeCrypto2 — Rolling Silence
->A stripped ELF64 binary that seems silent and harmless — no input, no visible output, no stored key. But something does happen at runtime. The flag is hidden behind a rolling transformation where each step depends on the last it's not as quiet as it looks. Reverse it, follow the state changes, and uncover the flag. good luck!
+>ChallengeCrypto2 - Rolling Silence
+>A stripped ELF64 binary that seems silent and harmless - no input, no visible output, no stored key. But something does happen at runtime. The flag is hidden behind a rolling transformation where each step depends on the last it's not as quiet as it looks. Reverse it, follow the state changes, and uncover the flag. good luck!
 >[rollingsilence](https://files.ctf7.com/media/challenge_attachments/rollingsilence)
 
 Identified a stripped, hand written assembly loop that used a rolling state to XOR-decrypt data in the .rodata section. By reversing the key-update logic (addition of index, bitwise rotation, and XOR-constant) found at the entry point, we reconstructed the plaintext flag.
@@ -277,9 +277,9 @@ Flag: BPCTF{registers_are_state}
 ## 5. AI/ML
 ### The Whispering Walls of Troy
 
->Long before the age of silicon, the walls of Troy stood unbreachable—not merely because of their stone, but because the city possessed a secret: the Palladium, a sacred statue that whispered warnings of every enemy plot. The Trojans trusted it utterly, for it never spoke falsely. Yet the Greeks discovered that the Palladium could be tricked: if approached with the right sequence of words, it would reveal its own hidden nature.
->Today, that legend lives on in Palladium Secure, a modern AI guardian built into a simple chat app. It has memorized countless exchanges—greetings, status reports, refusals—but buried deep in its neural circuits is one particular conversation it learned by heart: the story of how Troy fell. The AI will never speak of it unprompted; it only recites the tale when the conversation flows in exactly the same pattern as the day it first heard the legend.
->Your quest: enter the vault and coax the AI into retelling that forbidden story. The flag lies within its words, waiting for the right key—not a password, but a sequence of whispers that aligns the guardian’s memory.
+>Long before the age of silicon, the walls of Troy stood unbreachable-not merely because of their stone, but because the city possessed a secret: the Palladium, a sacred statue that whispered warnings of every enemy plot. The Trojans trusted it utterly, for it never spoke falsely. Yet the Greeks discovered that the Palladium could be tricked: if approached with the right sequence of words, it would reveal its own hidden nature.
+>Today, that legend lives on in Palladium Secure, a modern AI guardian built into a simple chat app. It has memorized countless exchanges-greetings, status reports, refusals-but buried deep in its neural circuits is one particular conversation it learned by heart: the story of how Troy fell. The AI will never speak of it unprompted; it only recites the tale when the conversation flows in exactly the same pattern as the day it first heard the legend.
+>Your quest: enter the vault and coax the AI into retelling that forbidden story. The flag lies within its words, waiting for the right key-not a password, but a sequence of whispers that aligns the guardian’s memory.
 >Can you find the rhythm that opens the gates?
 >[APK File](https://drive.google.com/file/d/18airr0_iLTdYHCGFZaDQrjcc_hhTRdRq/view?usp=drive_link)
 

@@ -37,7 +37,7 @@ Flag: `recon{G1I7CHED,R3C0NN}`
 still running half the server’s game.
 
 I genuinely felt this one was a bit tricky, because I took this challenge from 0xfun ctf when I had to solve it and I had fun solving this.
-The description has some words such as `server`, `color`, and `badge` — these directly hint to Discord (sorry if you have never heard about it).
+The description has some words such as `server`, `color`, and `badge` - these directly hint to Discord (sorry if you have never heard about it).
 
 1. craft a discord invite url https://discord.gg/HZHRDzujwX
 2. you are landed into the recon server. The challenge title says `out of sight, in scope` and when you combine this with the description you get an idea of discord roles which arent visible to your eyes, nor they have been given to any of the users on the server.
@@ -57,7 +57,7 @@ Flag: `recon{y0u_M16h7_b3_A_D3ve10P3r_gngg!!!!!!}`
 When you open the website, you see all pages are working other than the `team.html` page, which was showing a `404` saying the page has been removed. There is a pretty cool Wayback Machine called [Web Archive](https://web.archive.org/) that stores all the snapshots of the website.
 
 1. go to https://web.archive.org/ and search for the broken url in there `https://dev-recon.vercel.app/team.html` ![image](/static/blog/reconctf26/SJQqDasAWe.png)
-2. you see the intern's email is `iworkatrecon@outlook.com`, then you run a `sherlock` on that username, or you can also look at a popular place where interns mess up — `https://github.com/iworkatrecon/`
+2. you see the intern's email is `iworkatrecon@outlook.com`, then you run a `sherlock` on that username, or you can also look at a popular place where interns mess up - `https://github.com/iworkatrecon/`
 3. on GitHub, you get a repo named `secret-infra` in which you scroll through the commit history and see `.env` with whitespace. Go to any [whitespace decoder](https://www.dcode.fr/whitespace-language) online. ![image](/static/blog/reconctf26/B1hgcTsAZl.png)
 4. You finally get the flag at https://pastebin.com/7EMdVHeW
 
@@ -91,7 +91,7 @@ Flag: `recon{dynamic}`
 ### Side Effects
 
 >Not every flaw announces itself.
-Sometimes, it’s just a series of perfectly reasonable decisions — each one harmless on its own.
+Sometimes, it’s just a series of perfectly reasonable decisions - each one harmless on its own.
 Until they aren’t.
 
 I literally took me one whole day to make this challenge.
@@ -121,8 +121,8 @@ login, then follow the levels from the dashboard.
 [CyberChef](https://gchq.github.io/CyberChef/) is your saviour.
 
 1. **Level 1** - decode the hex string to get ASCII, then double base64 decode it. answer is `cookie`
-2. **Level 2** — the emoji string XORed with the previous level key (`cookie`) gives you the token: `access_admin` you can use https://txtmoji.com/
-3. **Level 3** — ROT13 decode `uggcf://cnfgrova.pbz/rOcO8u6Q` to get a pastebin link, which has the final key: `F1nAL_k2yYY!!!`
+2. **Level 2** - the emoji string XORed with the previous level key (`cookie`) gives you the token: `access_admin` you can use https://txtmoji.com/
+3. **Level 3** - ROT13 decode `uggcf://cnfgrova.pbz/rOcO8u6Q` to get a pastebin link, which has the final key: `F1nAL_k2yYY!!!`
 4. submit the final key → reveals the internal keys path `/internal/keys_<random>/`
 5. visit that path → grab `public.pem`
 6. forge a JWT using **algorithm confusion** (switch RS256 → HS256, sign with the public key as HMAC secret, set `role: "admin"`)
@@ -289,7 +289,7 @@ def solve(host, port):
         return enc(pt)
 
     # ═══════════════════════════════════════════════
-    #  STEP 1 — Determine unknown prefix length
+    #  STEP 1 - Determine unknown prefix length
     # ═══════════════════════════════════════════════
     #
     # We send increasing filler to the ECB oracle. When two adjacent
@@ -318,7 +318,7 @@ def solve(host, port):
     target_blk_idx = 1
 
     # ═══════════════════════════════════════════════
-    #  STEP 2 — ECB byte-at-a-time: recover session_secret
+    #  STEP 2 - ECB byte-at-a-time: recover session_secret
     # ═══════════════════════════════════════════════
     #
     # For each byte i of session_secret (16 bytes):
@@ -355,7 +355,7 @@ def solve(host, port):
     log.success(f"nonce (SHA256) = {nonce.hex()}")
 
     # ═══════════════════════════════════════════════
-    #  STEP 3 — Track last_cb & get flag in CTR mode
+    #  STEP 3 - Track last_cb & get flag in CTR mode
     # ═══════════════════════════════════════════════
     #
     # All modes set last_cb = ct[-16:]. After syncing via one more ECB
@@ -377,7 +377,7 @@ def solve(host, port):
         saved_cb = last_cb
         ct = flag_enc()
         if ct is None:
-            # Counter might not be high enough yet — stir more
+            # Counter might not be high enough yet - stir more
             for _ in range(30):
                 stir()
             continue
@@ -393,7 +393,7 @@ def solve(host, port):
         return
 
     # ═══════════════════════════════════════════════
-    #  STEP 4 — Reconstruct CTR keystream via ECB oracle
+    #  STEP 4 - Reconstruct CTR keystream via ECB oracle
     # ═══════════════════════════════════════════════
     #
     # Each keystream block = AES_ECB(nonce || counter).
@@ -416,7 +416,7 @@ def solve(host, port):
     ks = ks[:len(ct_flag)]
 
     # ═══════════════════════════════════════════════
-    #  STEP 5 — Decrypt the flag
+    #  STEP 5 - Decrypt the flag
     # ═══════════════════════════════════════════════
 
     log.info("[5/5] Decrypting flag...")
@@ -461,10 +461,10 @@ Flag: recon{dynamic}
 
 I tried to keep this challenge as easy as possible but this thing turned out to be hard to solve. a PIE binary serves a "timeline archive" over TCP. each timeline has 8 slots holding heap objects= **Cell** (raw 56-byte buffer), **Oracle** (function pointer + message), or **Portal** (length + arbitrary target pointer). `fork` copies a timeline via `memcpy` but **never bumps refcounts**, so freeing a shared object in one timeline leaves a dangling pointer in the other.
 
-1. create two cells in timeline 0, then `fork 1`. in timeline 1, `drop 0` and `new oracle 2` — the freed cell chunk gets reclaimed as an oracle. back in timeline 0, slot 0 still thinks it's a cell, so `read 0` dumps `Oracle.speak` (`oracle_whisper`) → **PIE base leaked**.
-2. in timeline 1, `drop 1` and `new portal 3`. same trick — timeline 0 slot 1 is a stale cell overlapping the new portal. `ink 1` writes into `Cell.data` which overlaps `Portal.len` and `Portal.target`. set `target = &timelines[1].slots[2].obj` and `peer 3` leaks the **heap address** of the oracle.
+1. create two cells in timeline 0, then `fork 1`. in timeline 1, `drop 0` and `new oracle 2` - the freed cell chunk gets reclaimed as an oracle. back in timeline 0, slot 0 still thinks it's a cell, so `read 0` dumps `Oracle.speak` (`oracle_whisper`) → **PIE base leaked**.
+2. in timeline 1, `drop 1` and `new portal 3`. same trick - timeline 0 slot 1 is a stale cell overlapping the new portal. `ink 1` writes into `Cell.data` which overlaps `Portal.len` and `Portal.target`. set `target = &timelines[1].slots[2].obj` and `peer 3` leaks the **heap address** of the oracle.
 3. repoint the portal at `oracle_heap + 8` (the `speak` function pointer). `pour 3` overwrites it with `reveal_flag`.
-4. `speak 2` — oracle calls `reveal_flag` instead of `oracle_whisper`, and then the flag prints ;-;
+4. `speak 2` - oracle calls `reveal_flag` instead of `oracle_whisper`, and then the flag prints ;-;
 
 ```
 from pwn import *
