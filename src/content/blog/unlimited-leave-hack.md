@@ -22,6 +22,8 @@ At VIT-AP, all of this happens on a student portal called VTOP.
 
 One day, while casually navigating through old outing passes (okay, maybe with Burp Suite open), I noticed something that made me freeze.
 
+![gif](/static/blog/unlimited-leave-hack/leave1.gif)
+
 ## The Discovery
 
 After applying for a new leave, I looked at the request that generated the outing form. It looked something like this:
@@ -71,8 +73,6 @@ I won't lie. For a second, I sat there like:
 "I could generate outing passes for anyone?"
 
 Unlimited outings. Unlimited freedom. Zero oversight.
-
-![gif](/static/blog/unlimited-leave-hack/leave1.gif)
 
 But here's the thing: that's not why I do this.
 
