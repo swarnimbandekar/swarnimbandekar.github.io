@@ -110,7 +110,7 @@ code {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: calc(var(--header-height) + 1.5rem) 1.5rem 1.5rem;
+  padding: calc(var(--header-height) + env(safe-area-inset-top) + 1.5rem) 1.5rem 1.5rem;
   flex: 1;
 }
 
@@ -128,6 +128,7 @@ code {
   border-bottom: 1px solid var(--border);
   background: var(--bg);
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  padding-top: env(safe-area-inset-top);
 }
 
 .site-header.scrolled {
@@ -756,8 +757,8 @@ html.light .theme-toggle .icon-moon {
   width: 100%;
   max-width: 260px;
   position: sticky;
-  top: calc(var(--header-height) + 1.5rem);
-  max-height: calc(100vh - var(--header-height) - 3rem);
+  top: calc(var(--header-height) + env(safe-area-inset-top) + 1.5rem);
+  max-height: calc(100vh - var(--header-height) - env(safe-area-inset-top) - 3rem);
   overflow-y: auto;
 }
 
@@ -903,7 +904,7 @@ html.light .theme-toggle .icon-moon {
   }
 
   .content-wrapper {
-    padding: 0 1rem;
+    padding: calc(var(--header-height) + env(safe-area-inset-top) + 1rem) 1rem 1rem;
   }
 
   .header-inner {
