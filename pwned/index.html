@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Security Notice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090b;
+    --fg:#f2f4f7;
+    --fg-dim:#9aa3b2;
+    --fg-faint:#596273;
+    --line:rgba(255,255,255,.08);
+    --line-soft:rgba(255,255,255,.05);
+    --accent:#c6f24e;
+    --accent-ink:#08090b;
+    --accent-dim:#8ea03a;
+    --alert:#ff5c6c;
+    /* display fallback is a geometric SANS (never mono), so it never looks cheap offline */
+    --display:"Chakra Petch",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;width:100%}
+  html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{
+    background:var(--bg);color:var(--fg);
+    font-family:var(--mono);
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+
+  /* ---- full-bleed background layers ---- */
+  .bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .bg.grid{
+    background-image:
+      linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 90% 80% at 50% 45%,#000 30%,transparent 100%);
+  }
+  .bg.glow-a{background:radial-gradient(60vw 60vw at 18% 10%,rgba(198,242,78,.10),transparent 60%)}
+  .bg.glow-b{background:radial-gradient(55vw 55vw at 88% 92%,rgba(255,92,108,.06),transparent 60%)}
+  .bg.scan{
+    background:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(0,0,0,.18) 3px 4px);
+    opacity:.5;mix-blend-mode:multiply;
+  }
+
+  /* ---- top status bar ---- */
+  .topbar{
+    position:relative;z-index:2;
+    display:flex;align-items:center;gap:14px;
+    padding:18px clamp(20px,5vw,56px);
+    border-bottom:1px solid var(--line-soft);
+    font-size:12px;letter-spacing:.08em;color:var(--fg-faint);
+    backdrop-filter:blur(2px);
+  }
+  .sigil{
+    width:30px;height:30px;border-radius:8px;flex:none;display:grid;place-items:center;
+    background:var(--accent);color:var(--accent-ink);
+    font-family:var(--display);font-weight:700;font-size:17px;
+    box-shadow:0 0 22px rgba(198,242,78,.4);
+  }
+  .topbar .host{color:var(--fg-dim)}
+  .topbar .host b{color:var(--accent);font-weight:500}
+  .topbar .badge{
+    margin-left:auto;display:inline-flex;align-items:center;gap:8px;
+    padding:7px 14px;border:1px solid rgba(255,92,108,.3);border-radius:999px;
+    color:var(--alert);font-weight:500;letter-spacing:.16em;font-size:11px;
+    background:rgba(255,92,108,.06);
+  }
+  .badge i{width:7px;height:7px;border-radius:50%;background:var(--alert);box-shadow:0 0 12px var(--alert);animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+  /* ---- hero fills remaining space ---- */
+  .hero{
+    position:relative;z-index:2;flex:1;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(28px,6vw,72px) clamp(20px,5vw,56px);
+  }
+  .eyebrow{
+    font-size:clamp(11px,2.4vw,13px);letter-spacing:.42em;text-transform:uppercase;
+    color:var(--accent-dim);margin-bottom:clamp(18px,3vw,30px);
+    display:flex;align-items:center;gap:16px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(84px,24vw,340px);
+    line-height:.82;letter-spacing:-.04em;
+    color:#fff;text-transform:uppercase;
+    display:flex;align-items:flex-start;gap:.04em;
+  }
+  h1 .dot{color:var(--accent)}
+
+  .signed{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(18px,4.2vw,30px);
+    color:var(--fg-dim);margin-top:clamp(20px,3vw,34px);letter-spacing:.01em;
+  }
+  .signed b{color:#fff;font-weight:600}
+  .signed .rule{color:var(--accent);margin:0 2px}
+
+  .lede{
+    margin-top:clamp(22px,3vw,30px);max-width:62ch;
+    font-size:clamp(13px,1.6vw,15.5px);line-height:1.7;color:var(--fg-dim);
+  }
+  .lede strong{color:var(--fg);font-weight:500}
+  .lede .k{color:var(--accent)}
+
+  /* ---- bottom bar: full-width meta strip ---- */
+  .botbar{
+    position:relative;z-index:2;
+    border-top:1px solid var(--line-soft);
+    display:grid;grid-template-columns:repeat(3,1fr);
+    backdrop-filter:blur(2px);
+  }
+  .botbar .cell{
+    padding:16px clamp(20px,5vw,56px);
+    border-right:1px solid var(--line-soft);
+  }
+  .botbar .cell:last-child{border-right:0}
+  .botbar .label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:7px}
+  .botbar .val{font-size:13px;color:var(--fg);font-weight:500}
+  .botbar .val.ok{color:var(--accent)}
+  .botbar .val.mono{font-size:11.5px;color:var(--fg-dim);word-break:break-all}
+
+  .policy{
+    position:relative;z-index:2;
+    padding:12px clamp(20px,5vw,56px);
+    border-top:1px solid var(--line-soft);
+    font-size:11px;color:var(--fg-faint);letter-spacing:.04em;
+    display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;
+  }
+  .policy .chip{padding:4px 10px;border:1px solid var(--line);border-radius:6px;color:var(--fg-dim);font-size:10px;letter-spacing:.1em}
+  .policy .txt{margin-left:auto}
+
+  @media (max-width:720px){
+    .botbar{grid-template-columns:repeat(2,1fr)}
+    .botbar .cell:nth-child(2n){border-right:0}
+    .policy .txt{margin-left:0;width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){.badge i{animation:none}}
+</style>
+</head>
+<body>
+  <div class="bg grid"></div>
+  <div class="bg glow-a"></div>
+  <div class="bg glow-b"></div>
+  <div class="bg scan"></div>
+
+  <main class="hero">
+    <div class="eyebrow">Security Notice</div>
+    <h1>Pwned<span class="dot">.</span></h1>
+  </main>
+
+  <div class="botbar">
+    <div class="cell"><div class="label">Researcher</div><div class="val">Swarnim Bandekar</div></div>
+    <div class="cell"><div class="label">Data integrity</div><div class="val ok">Untouched</div></div>
+    <div class="cell"><div class="label">Captured at</div><div class="val mono" id="ts">&mdash;</div></div>
+  </div>
+
+  <div class="policy">
+    <span class="chip">RESPONSIBLE DISCLOSURE</span>
+    <span class="chip">NON-DESTRUCTIVE</span>
+    <span class="chip" id="ref">POC-REF &mdash;</span>
+    <span class="txt">Reported under the program's disclosure policy &mdash; remove this marker after remediation.</span>
+  </div>
+
+<script>
+  try{ document.getElementById('host').textContent = location.hostname || 'this-origin'; }catch(e){}
+
+  document.getElementById('ts').textContent =
+    new Date().toISOString().replace('T',' ').replace(/\.\d+Z$/,' UTC');
+
+  (function(){
+    var seed = (location.hostname||'origin') + new Date().toISOString().slice(0,10);
+    var h = 0x811c9dc5;
+    for(var i=0;i<seed.length;i++){ h ^= seed.charCodeAt(i); h = Math.imul(h,0x01000193); }
+    var ref = ('SWN-'+(h>>>0).toString(16).padStart(8,'0')+'-'+(h>>>5).toString(16).slice(0,4)).toUpperCase();
+    document.getElementById('ref').textContent = 'POC-REF  '+ref;
+  })();
+</script>
+</body>
+</html>
