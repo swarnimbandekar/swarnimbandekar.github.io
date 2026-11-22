@@ -19,9 +19,10 @@
 
 ## Selected Open-Source Projects
 - **Bidoytu**: Desktop HTTP interception and offensive testing workspace built with Electron + React + TypeScript and an independent Python MITM network engine. (https://github.com/Bidoytu/Bidoytu)
-- **UniGuard**: Real-time, metadata-only cyber-threat detection pipeline for unidirectional IP traffic (SIH 2026 NTRO problem statement) detecting Port Scans, DDoS, DGA, C2 Beaconing, Encrypted Malware, and Exfiltration. (https://github.com/swarnimbandekar/uniguard)
 - **Knightlingo**: On-device Stockfish chess vision Android app and Chrome extension with translucent arrow overlay. (https://github.com/swarnimbandekar/knightlingo)
 - **Glidecast**: Open-source auto-zoom screen recorder for Windows in C#/.NET. (https://github.com/swarnimbandekar/glidecast)
+- **Spotify Now Playing**: Real-time Spotify activity SVG widget and multi-user OAuth 2.0 service built with TypeScript, Express, and Firebase Firestore. (https://github.com/swarnimbandekar/spotify-now-playing)
+- **UniGuard**: Real-time, metadata-only cyber-threat detection pipeline for unidirectional IP traffic (SIH 2026 NTRO problem statement) detecting Port Scans, DDoS, DGA, C2 Beaconing, Encrypted Malware, and Exfiltration. (https://github.com/swarnimbandekar/uniguard)
 - **XSSurge**: High-concurrency adaptive XSS discovery scanner. (https://github.com/swarnimbandekar/XSSurge)
 - **Punygen**: Terminal Unicode homoglyph and IDNA Punycode generator for red-team phishing simulations. (https://github.com/swarnimbandekar/Punygen)
 

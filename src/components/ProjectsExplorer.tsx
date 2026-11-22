@@ -24,8 +24,8 @@ export function ProjectsExplorer({
     return PROJECTS.filter((p) => p.category === activeCat);
   }, [activeCat]);
 
-  const featuredProjects = filtered.filter((p) => !p.sideQuest);
-  const sideQuests = filtered.filter((p) => p.sideQuest);
+  const featuredProjects = filtered.filter((p) => p.featured);
+  const sideQuests = filtered.filter((p) => !p.featured);
 
   return (
     <div className="space-y-12">

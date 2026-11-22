@@ -156,25 +156,6 @@ export const PROJECTS: ProjectItem[] = [
     ],
   },
   {
-    id: 'uniguard',
-    title: 'UniGuard',
-    tagline: 'Real-time metadata-only cyber-threat detection pipeline',
-    description:
-      'Built for Smart India Hackathon 2026 (NTRO problem statement). Passively inspects unidirectional IP traffic from PCAP replays or a Windows capture bridge, classifying six threat categories without decrypting payloads and streaming alerts to a live SOC dashboard.',
-    category: 'ai-security',
-    categoryLabel: 'Threat Detection',
-    year: '2026',
-    featured: true,
-    stack: ['Python', 'gRPC', 'Streaming ML', 'PCAP / Flow Metadata', 'SOC UI'],
-    roles: ['SIH 2026 · NTRO', 'THREAT PIPELINE', 'ML INFERENCE'],
-    github: 'https://github.com/swarnimbandekar/uniguard',
-    highlights: [
-      'Detects port scanning, DDoS, DGA domains (via gRPC n-gram inference), C2 beaconing (periodicity & jitter), encrypted malware, and asymmetric data exfiltration.',
-      'Operates strictly on unidirectional flow metadata rather than payload decryption.',
-      'Streams classified alerts to a live SOC triage dashboard.',
-    ],
-  },
-  {
     id: 'knightlingo',
     title: 'Knightlingo',
     tagline: 'On-device Stockfish vision & arrow overlay',
@@ -207,6 +188,46 @@ export const PROJECTS: ProjectItem[] = [
     highlights: [
       'Records raw screen frames separately from cursor/click timelines so camera pans and zoom keyframes stay editable after capture.',
       'Free, open-source MIT alternative for clean technical demos and walkthrough videos.',
+    ],
+  },
+  {
+    id: 'spotify-now-playing',
+    title: 'Spotify Now Playing',
+    tagline: 'Real-time Spotify activity SVG widget & multi-user service',
+    description:
+      'Minimalist multi-user service that renders live Spotify playback as crisp SVG embeds for GitHub READMEs and portfolios. Supports Bring-Your-Own Spotify OAuth credentials, Firestore token persistence with auto-refresh, signed httpOnly sessions, and 30s server-side caching.',
+    category: 'dev-tools',
+    categoryLabel: 'Web Service',
+    year: '2026',
+    featured: true,
+    stack: ['TypeScript', 'Express', 'Firebase Firestore', 'Spotify API', 'SVG'],
+    roles: ['WEB SERVICE', 'OAUTH 2.0', 'SVG WIDGET'],
+    github: 'https://github.com/swarnimbandekar/spotify-now-playing',
+    live: 'https://spotify.swarnimbandekar.in',
+    highlights: [
+      'Renders live playback state as lightweight SVG embeds with 30s in-memory TTL caching to protect API rate limits.',
+      'Multi-user BYO-credentials OAuth 2.0 flow with CSRF state verification, account deduplication, and signed httpOnly session cookies.',
+      'Auto-refreshes expired Spotify tokens persisted in Google Cloud Firestore, keyed by unique user IDs.',
+    ],
+  },
+  {
+    id: 'uniguard',
+    title: 'UniGuard',
+    tagline: 'Real-time metadata-only cyber-threat detection pipeline',
+    description:
+      'Built for Smart India Hackathon 2026 (NTRO problem statement). Passively inspects unidirectional IP traffic from PCAP replays or a Windows capture bridge, classifying six threat categories without decrypting payloads and streaming alerts to a live SOC dashboard.',
+    category: 'ai-security',
+    categoryLabel: 'Threat Detection',
+    year: '2026',
+    featured: false,
+    sideQuest: true,
+    stack: ['Python', 'gRPC', 'Streaming ML', 'PCAP / Flow Metadata', 'SOC UI'],
+    roles: ['SIH 2026 · NTRO', 'THREAT PIPELINE', 'ML INFERENCE'],
+    github: 'https://github.com/swarnimbandekar/uniguard',
+    highlights: [
+      'Detects port scanning, DDoS, DGA domains (via gRPC n-gram inference), C2 beaconing (periodicity & jitter), encrypted malware, and asymmetric data exfiltration.',
+      'Operates strictly on unidirectional flow metadata rather than payload decryption.',
+      'Streams classified alerts to a live SOC triage dashboard.',
     ],
   },
   {
