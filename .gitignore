@@ -1,9 +1,14 @@
 # Dependencies
 node_modules/
 
-# Astro
-dist/
-.astro/
+# Next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Local tooling
+graphify-out/
 
 # Environment
 .env
@@ -18,10 +23,6 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
-
-# Claude
-claude.md
-skill.md
 
 # Temp
 _astro_temp/

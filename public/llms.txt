@@ -1,0 +1,34 @@
+# Swarnim Bandekar (pixy / dirtrav)
+> Offensive Security Researcher, Red Teamer, API Security Specialist, and Systems Builder based in Bengaluru, India.
+
+- Website: https://swarnimbandekar.in
+- GitHub: https://github.com/swarnimbandekar
+- LinkedIn: https://www.linkedin.com/in/swarnimbandekar/
+- X (Twitter): https://x.com/dirtrav
+- Medium: https://medium.com/@swarnimbandekar
+- Email: hello@swarnimbandekar.in
+
+## Core Focus
+- Web & API Penetration Testing (BOLA/IDOR, Race Conditions, JWT/OAuth, DOM Clobbering, Prototype Pollution, CSP Bypass)
+- Red Teaming & Active Directory Exploitation (Initial Access to Domain Admin, Privilege Escalation, Malware/Token-Stealer Reverse Engineering)
+- Security Engineering (HTTP MITM Proxies, Unidirectional Flow Threat Detection, CTF Infrastructure)
+
+## Certifications
+- **CRTA (Certified Red Team Analyst)** - CyberWarFare Labs (May 2026, Passed with 100% score in 6-hour hands-on AD red-team exam). Review: https://swarnimbandekar.in/blog/crta
+- **ASCP (API Security Certified Professional)** - APIsec University (May 2026, Captured 6/8 flags in 12-hour practical API hacking exam). Review: https://swarnimbandekar.in/blog/ascp
+
+## Selected Open-Source Projects
+- **Bidoytu**: Desktop HTTP interception and offensive testing workspace built with Electron + React + TypeScript and an independent Python MITM network engine. (https://github.com/Bidoytu/Bidoytu)
+- **UniGuard**: Real-time, metadata-only cyber-threat detection pipeline for unidirectional IP traffic (SIH 2026 NTRO problem statement) detecting Port Scans, DDoS, DGA, C2 Beaconing, Encrypted Malware, and Exfiltration. (https://github.com/swarnimbandekar/uniguard)
+- **Knightlingo**: On-device Stockfish chess vision Android app and Chrome extension with translucent arrow overlay. (https://github.com/swarnimbandekar/knightlingo)
+- **Glidecast**: Open-source auto-zoom screen recorder for Windows in C#/.NET. (https://github.com/swarnimbandekar/glidecast)
+- **XSSurge**: High-concurrency adaptive XSS discovery scanner. (https://github.com/swarnimbandekar/XSSurge)
+- **Punygen**: Terminal Unicode homoglyph and IDNA Punycode generator for red-team phishing simulations. (https://github.com/swarnimbandekar/Punygen)
+
+## Primary Pages
+- Home: https://swarnimbandekar.in/
+- Projects: https://swarnimbandekar.in/projects
+- Resume / CV: https://swarnimbandekar.in/resume
+- Security Writeups & Blog: https://swarnimbandekar.in/blog
+- About: https://swarnimbandekar.in/about
+- Contact: https://swarnimbandekar.in/contact

@@ -1,4 +1,4 @@
-name: Deploy Astro to GitHub Pages
+name: Deploy Next.js to GitHub Pages
 
 on:
   push:
@@ -25,17 +25,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Astro
+      - name: Build Next.js Static Export
         run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./out
 
   deploy:
     environment:
