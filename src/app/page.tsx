@@ -23,15 +23,15 @@ export default async function HomePage() {
 
       {/* 2. Things I've shipped - Minimal Horizontal Accordion */}
       <ScrollReveal>
-        <section className="mx-auto mt-20 max-w-6xl px-4 sm:px-6" aria-labelledby="projects-heading">
-          <div className="mb-8 border-b border-[var(--border)] pb-5">
+        <section className="mx-auto mt-14 sm:mt-20 max-w-6xl px-4 sm:px-6" aria-labelledby="projects-heading">
+          <div className="mb-6 sm:mb-8 border-b border-[var(--border)] pb-4 sm:pb-5">
             <h2
               id="projects-heading"
-              className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-[var(--text-primary)]"
+              className="font-display text-2xl sm:text-4xl font-bold tracking-[-0.03em] text-[var(--text-primary)]"
             >
               Things I&apos;ve shipped
             </h2>
-            <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+            <div className="mt-2 flex flex-wrap items-center justify-between gap-2 sm:gap-4">
               <p className="text-sm text-[var(--text-secondary)]">
                 Selected work. Open-source security tools and systems.
               </p>
@@ -55,15 +55,15 @@ export default async function HomePage() {
 
       {/* 4. Writing - Minimal Editorial List (beebombshell.com inspired) */}
       <ScrollReveal>
-        <section className="mx-auto mt-24 max-w-6xl px-4 sm:px-6" aria-labelledby="writing-heading">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--border)] pb-5">
+        <section className="mx-auto mt-16 sm:mt-24 max-w-6xl px-4 sm:px-6" aria-labelledby="writing-heading">
+          <div className="mb-6 sm:mb-8 flex flex-wrap items-end justify-between gap-3 sm:gap-4 border-b border-[var(--border)] pb-4 sm:pb-5">
             <div>
               <div className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">
                 03 · Writing
               </div>
               <h2
                 id="writing-heading"
-                className="font-display mt-1.5 text-3xl sm:text-4xl font-bold tracking-[-0.03em]"
+                className="font-display mt-1.5 text-2xl sm:text-4xl font-bold tracking-[-0.03em]"
               >
                 Dispatches &amp; writeups
               </h2>
@@ -83,10 +83,10 @@ export default async function HomePage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:px-7 sm:py-5 transition-colors hover:bg-[var(--bg-surface)]/70"
+                className="group flex items-start sm:items-center justify-between gap-3 sm:gap-4 p-4 sm:px-7 sm:py-5 transition-colors hover:bg-[var(--bg-surface)]/70"
               >
                 <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2.5 font-mono text-[11px] text-[var(--text-muted)]">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 sm:gap-2.5 font-mono text-[11px] text-[var(--text-muted)]">
                     <span>{post.formattedDate}</span>
                     <span>·</span>
                     <span>{post.readingTime}</span>
@@ -99,15 +99,15 @@ export default async function HomePage() {
                       </span>
                     ))}
                   </div>
-                  <h3 className="font-display mt-1.5 text-lg sm:text-xl font-semibold tracking-[-0.02em] text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+                  <h3 className="font-display mt-1.5 text-base sm:text-xl font-semibold tracking-[-0.02em] text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
                     {post.title}
                   </h3>
-                  <p className="mt-1 line-clamp-1 text-sm text-[var(--text-secondary)]">
+                  <p className="mt-1 line-clamp-2 sm:line-clamp-1 text-xs sm:text-sm text-[var(--text-secondary)]">
                     {post.description}
                   </p>
                 </div>
 
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-all group-hover:border-[var(--accent-border)] group-hover:bg-[var(--accent)] group-hover:text-white">
+                <span className="mt-1 sm:mt-0 flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-all group-hover:border-[var(--accent-border)] group-hover:bg-[var(--accent)] group-hover:text-white">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </Link>
@@ -118,8 +118,8 @@ export default async function HomePage() {
 
       {/* 5. Experience & Credentials Snapshot (itsgathin.com 05 · ABOUT split) */}
       <ScrollReveal>
-        <section className="mx-auto mt-24 max-w-6xl px-4 sm:px-6" aria-labelledby="experience-heading">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <section className="mx-auto mt-16 sm:mt-24 max-w-6xl px-4 sm:px-6" aria-labelledby="experience-heading">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             {/* Left Candid Story */}
             <div className="lg:col-span-5">
               <div className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">
@@ -127,7 +127,7 @@ export default async function HomePage() {
               </div>
               <h2
                 id="experience-heading"
-                className="font-display mt-2 text-3xl sm:text-4xl font-bold tracking-[-0.03em] leading-[1.12]"
+                className="font-display mt-2 text-2xl sm:text-4xl font-bold tracking-[-0.03em] leading-[1.12]"
               >
                 From breaking student portals to shipping security systems.
               </h2>
@@ -154,7 +154,7 @@ export default async function HomePage() {
 
             {/* Right Vertical Timeline Card */}
             <div className="lg:col-span-7">
-              <div className="surface-card rounded-2xl p-6 sm:p-7">
+              <div className="surface-card rounded-2xl p-5 sm:p-7">
                 <div className="flex items-center justify-between border-b border-[var(--border)] pb-3.5 mb-5">
                   <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                     Timeline · {EXPERIENCE.length + CERTIFICATIONS.length} Milestones

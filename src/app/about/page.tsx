@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-28 pb-10">
-      <header className="mb-10 border-b border-[var(--border)] pb-8">
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-24 sm:pt-28 pb-10">
+      <header className="mb-8 sm:mb-10 border-b border-[var(--border)] pb-6 sm:pb-8">
         <div className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">
           About
         </div>
-        <h1 className="font-display mt-2 text-4xl sm:text-5xl font-bold tracking-[-0.035em] text-[var(--text-primary)]">
+        <h1 className="font-display mt-2 text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-[var(--text-primary)]">
           Breaking things carefully, then building the fix.
         </h1>
       </header>
@@ -123,9 +123,9 @@ export default function AboutPage() {
                 <dt className="text-[var(--text-muted)]">Daily OS</dt>
                 <dd className="text-right text-[var(--text-primary)]">Windows &amp; Kali</dd>
               </div>
-              <div className="flex justify-between gap-4">
-                <dt className="text-[var(--text-muted)]">Email</dt>
-                <dd className="text-right">
+              <div className="flex flex-wrap justify-between gap-x-4 gap-y-1">
+                <dt className="shrink-0 text-[var(--text-muted)]">Email</dt>
+                <dd className="text-right break-all">
                   <a href={`mailto:${PROFILE.email}`} className="text-[var(--accent)] hover:underline">
                     {PROFILE.email}
                   </a>

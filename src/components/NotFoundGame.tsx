@@ -157,7 +157,7 @@ export function NotFoundGame() {
           ref={canvasRef}
           width={560}
           height={190}
-          className="w-full rounded-xl bg-[#09090b] cursor-pointer"
+          className="w-full rounded-xl bg-[#09090b] cursor-pointer touch-manipulation"
         />
         <p className="mt-2.5 font-mono text-xs text-[var(--text-muted)]">{hint}</p>
       </div>

@@ -88,7 +88,7 @@ export function CommandPalette({ posts }: { posts: PalettePost[] }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.16 }}
           onClick={() => setOpen(false)}
-          className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 px-4 pt-[12vh] backdrop-blur-sm no-print"
+          className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 px-3 sm:px-4 pt-[8vh] sm:pt-[12vh] backdrop-blur-sm no-print"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: -8 }}
@@ -102,27 +102,27 @@ export function CommandPalette({ posts }: { posts: PalettePost[] }) {
             className="w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-[var(--bg-elevated)] shadow-2xl"
           >
             {/* Search Input */}
-            <div className="flex items-center gap-3 border-b border-[var(--border)] px-4 py-3.5">
-              <Search className="h-4 w-4 text-[var(--text-muted)]" />
+            <div className="flex items-center gap-3 border-b border-[var(--border)] px-3.5 sm:px-4 py-3 sm:py-3.5">
+              <Search className="h-4 w-4 shrink-0 text-[var(--text-muted)]" />
               <input
                 type="text"
                 autoFocus
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Jump to a page, project, or writeup..."
-                className="flex-1 bg-transparent font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none"
+                className="min-w-0 flex-1 bg-transparent font-mono text-base sm:text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none"
               />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded border border-[var(--border)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--text-muted)] cursor-pointer"
+                className="shrink-0 rounded border border-[var(--border)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--text-muted)] cursor-pointer"
               >
                 ESC
               </button>
             </div>
 
             {/* Results */}
-            <div className="max-h-[360px] overflow-y-auto p-2">
+            <div className="max-h-[60dvh] sm:max-h-[360px] overflow-y-auto p-2">
               {filteredNav.length > 0 && (
                 <div className="mb-2">
                   <div className="px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)]">

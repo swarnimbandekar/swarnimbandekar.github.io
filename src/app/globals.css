@@ -131,6 +131,13 @@
   outline: none;
 }
 
+@media (pointer: coarse), (max-width: 639px) {
+  .badge-card {
+    touch-action: pan-y;
+    cursor: pointer;
+  }
+}
+
 .badge-card.is-dragging {
   cursor: grabbing;
 }
@@ -313,8 +320,16 @@
    ========================================================================== */
 .prose-article {
   color: var(--text-secondary);
-  font-size: 0.98rem;
-  line-height: 1.78;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .prose-article {
+    font-size: 0.98rem;
+    line-height: 1.78;
+  }
 }
 
 .prose-article h1,
@@ -358,6 +373,7 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  overflow-wrap: anywhere;
 }
 
 .prose-article strong {
@@ -414,7 +430,17 @@
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 640px) {
+  .prose-article table {
+    display: table;
+    font-size: 0.88rem;
+  }
 }
 
 .prose-article th,
@@ -439,22 +465,32 @@
   border-radius: 5px;
   padding: 0.14em 0.38em;
   color: var(--text-primary);
+  overflow-wrap: anywhere;
 }
 
 /* Shiki / rehype-pretty-code blocks */
 .prose-article figure[data-rehype-pretty-code-figure] {
   margin: 1.5rem 0;
+  max-width: 100%;
 }
 
 .prose-article pre {
   background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 1rem 1.2rem;
+  padding: 0.85rem 1rem;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   font-family: var(--font-jetbrains), monospace;
-  font-size: 0.83rem;
+  font-size: 0.78rem;
   line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .prose-article pre {
+    padding: 1rem 1.2rem;
+    font-size: 0.83rem;
+  }
 }
 
 .prose-article pre code {

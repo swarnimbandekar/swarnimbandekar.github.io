@@ -83,7 +83,7 @@ export default async function BlogPostPage({
       : null;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-28 pb-12">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-24 sm:pt-28 pb-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -91,30 +91,30 @@ export default async function BlogPostPage({
         }}
       />
 
-      <div className="grid grid-cols-1 xl:grid-cols-[240px_minmax(0,760px)_240px] gap-8 justify-center">
+      <div className="grid grid-cols-1 xl:grid-cols-[240px_minmax(0,760px)_240px] gap-6 xl:gap-8 justify-center">
         {/* Left Sticky Table of Contents */}
-        <div className="xl:col-start-1">
+        <div className="xl:col-start-1 min-w-0">
           <TableOfContents headings={post.headings} />
         </div>
 
         {/* Center Main Article */}
         <article className="xl:col-start-2 min-w-0">
           {/* Breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 font-mono text-xs text-[var(--text-muted)]">
-            <Link href="/" className="hover:text-[var(--text-primary)]" aria-label="Home">
+          <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6 flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)] min-w-0">
+            <Link href="/" className="shrink-0 hover:text-[var(--text-primary)]" aria-label="Home">
               <Home className="h-3.5 w-3.5" />
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 opacity-50" />
-            <Link href="/blog" className="hover:text-[var(--text-primary)]">
+            <ChevronRight className="h-3.5 w-3.5 shrink-0 opacity-50" />
+            <Link href="/blog" className="shrink-0 hover:text-[var(--text-primary)]">
               Writing
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 opacity-50" />
-            <span className="truncate text-[var(--text-secondary)]">{post.title}</span>
+            <ChevronRight className="h-3.5 w-3.5 shrink-0 opacity-50" />
+            <span className="min-w-0 truncate text-[var(--text-secondary)]">{post.title}</span>
           </nav>
 
           {/* Post Header */}
-          <header className="border-b border-[var(--border)] pb-6 mb-8">
-            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.03em] leading-[1.15] text-[var(--text-primary)]">
+          <header className="border-b border-[var(--border)] pb-6 mb-7 sm:mb-8">
+            <h1 className="font-display text-2xl sm:text-4xl font-bold tracking-[-0.03em] leading-[1.15] text-[var(--text-primary)]">
               {post.title}
             </h1>
 
@@ -166,12 +166,12 @@ export default async function BlogPostPage({
           {(prevPost || nextPost) && (
             <nav
               aria-label="Article navigation"
-              className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-[var(--border)] pt-8"
+              className="mt-12 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 border-t border-[var(--border)] pt-8"
             >
-              {prevPost ? (
+              {prevPost && (
                 <Link
                   href={`/blog/${prevPost.slug}`}
-                  className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 transition-colors hover:border-[var(--accent-border)]"
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-4 sm:p-5 transition-colors hover:border-[var(--accent-border)]"
                 >
                   <div className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-[var(--text-muted)]">
                     <ArrowLeft className="h-3 w-3" /> Previous
@@ -180,14 +180,12 @@ export default async function BlogPostPage({
                     {prevPost.title}
                   </div>
                 </Link>
-              ) : (
-                <div />
               )}
 
-              {nextPost ? (
+              {nextPost && (
                 <Link
                   href={`/blog/${nextPost.slug}`}
-                  className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 text-right transition-colors hover:border-[var(--accent-border)]"
+                  className="sm:col-start-2 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-4 sm:p-5 text-left sm:text-right transition-colors hover:border-[var(--accent-border)]"
                 >
                   <div className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-[var(--text-muted)]">
                     Next <ArrowRight className="h-3 w-3" />
@@ -196,8 +194,6 @@ export default async function BlogPostPage({
                     {nextPost.title}
                   </div>
                 </Link>
-              ) : (
-                <div />
               )}
             </nav>
           )}

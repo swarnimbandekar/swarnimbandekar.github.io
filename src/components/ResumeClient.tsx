@@ -126,7 +126,7 @@ export function ResumeClient() {
               <span>swarnimbandekar.resume.json</span>
               <span className="text-[#34d399]">200 OK</span>
             </div>
-            <pre className="overflow-x-auto p-5 font-mono text-xs leading-relaxed text-zinc-300">
+            <pre className="overflow-x-auto p-3.5 sm:p-5 font-mono text-[11px] sm:text-xs leading-relaxed text-zinc-300">
               <code>{jsonString}</code>
             </pre>
           </motion.div>
@@ -137,28 +137,28 @@ export function ResumeClient() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="space-y-10"
+            className="space-y-8 sm:space-y-10"
           >
             {/* Header Summary Card */}
-            <section className="surface-card rounded-2xl p-6 sm:p-8 print:border-zinc-300 print:shadow-none">
-              <div className="flex flex-wrap items-start justify-between gap-6">
-                <div className="flex items-center gap-4">
+            <section className="surface-card rounded-2xl p-5 sm:p-8 print:border-zinc-300 print:shadow-none">
+              <div className="flex flex-wrap items-start justify-between gap-5 sm:gap-6">
+                <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
                   <img
                     src="/static/logo.jpg"
                     alt={PROFILE.name}
                     width={64}
                     height={64}
-                    className="h-16 w-16 rounded-2xl border border-[var(--border-strong)] object-cover no-print"
+                    className="h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-2xl border border-[var(--border-strong)] object-cover no-print"
                   />
-                  <div>
-                    <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em]">
+                  <div className="min-w-0">
+                    <h1 className="font-display text-xl sm:text-3xl font-bold tracking-[-0.03em]">
                       {PROFILE.name}
                     </h1>
                     <p className="font-sans text-xs sm:text-sm font-medium text-[var(--accent)] mt-0.5">
                       {PROFILE.role}
                     </p>
-                    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-[var(--text-muted)]">
-                      <a href={`mailto:${PROFILE.email}`} className="hover:text-[var(--text-primary)]">
+                    <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] sm:text-xs text-[var(--text-muted)]">
+                      <a href={`mailto:${PROFILE.email}`} className="break-all hover:text-[var(--text-primary)]">
                         {PROFILE.email}
                       </a>
                       <span>|</span>
@@ -236,16 +236,16 @@ export function ResumeClient() {
                 {RESUME_EXPERIENCE.map((exp) => (
                   <article
                     key={`${exp.org}-${exp.role}`}
-                    className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-6"
+                    className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-4 sm:p-6"
                   >
-                    <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <h3 className="font-display text-lg font-bold text-[var(--text-primary)]">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2 sm:gap-3">
+                      <h3 className="font-display text-base sm:text-lg font-bold text-[var(--text-primary)]">
                         {exp.org} <span className="text-[var(--text-muted)] font-normal">|</span>{' '}
                         <span className="text-[var(--accent)]">{exp.role}</span>{' '}
                         <span className="text-[var(--text-muted)] font-normal">|</span>{' '}
-                        <span className="text-sm font-medium text-[var(--text-secondary)]">{exp.location}</span>
+                        <span className="text-xs sm:text-sm font-medium text-[var(--text-secondary)]">{exp.location}</span>
                       </h3>
-                      <span className="rounded-full border border-[var(--border)] bg-[var(--bg-surface)] px-3 py-1 font-mono text-[11px] text-[var(--text-muted)]">
+                      <span className="rounded-full border border-[var(--border)] bg-[var(--bg-surface)] px-2.5 sm:px-3 py-1 font-mono text-[11px] text-[var(--text-muted)]">
                         {exp.period}
                       </span>
                     </div>
@@ -272,7 +272,7 @@ export function ResumeClient() {
                 {RESUME_CERTIFICATIONS.map((cert) => (
                   <div
                     key={cert.title}
-                    className="flex flex-wrap items-center justify-between gap-2 px-6 py-4"
+                    className="flex flex-wrap items-center justify-between gap-2 px-4 py-3.5 sm:px-6 sm:py-4"
                   >
                     <div className="flex items-start gap-2.5 text-sm text-[var(--text-primary)]">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
@@ -301,7 +301,7 @@ export function ResumeClient() {
               <h2 className="font-display text-xl sm:text-2xl font-bold tracking-[-0.025em] mb-4">
                 Achievements
               </h2>
-              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-6">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-4 sm:p-6">
                 <ul className="space-y-2.5 text-sm leading-relaxed text-[var(--text-secondary)]">
                   {ACHIEVEMENTS.map((item) => (
                     <li key={item} className="flex items-start gap-2.5">

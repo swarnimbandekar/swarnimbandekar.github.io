@@ -129,7 +129,7 @@ function LogoTile({
               src={item.logo}
               alt={`${item.name} logo`}
               loading="lazy"
-              className={`max-h-5 max-w-[116px] w-auto object-contain opacity-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-[1.03] ${
+              className={`max-h-5 max-w-[96px] sm:max-w-[116px] w-auto object-contain opacity-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-[1.03] ${
                 item.invertOnDark ? 'dark:invert' : ''
               } ${item.invertOnLight ? 'invert dark:invert-0' : ''}`}
             />
@@ -166,7 +166,7 @@ function LogoTile({
           {item.name}
         </div>
         <div className="mt-0.5 flex items-center justify-between gap-1.5 font-mono text-[10px]">
-          <span className="text-[var(--mint)]">{item.acknowledgment}</span>
+          <span className="shrink-0 text-[var(--mint)]">{item.acknowledgment}</span>
           {item.tag && (
             <span className="truncate text-[var(--text-muted)]">{item.tag}</span>
           )}
@@ -217,7 +217,7 @@ function CveCard({ cve, canHover }: { cve: CveItem; canHover: boolean }) {
   return (
     <SpotlightSurface
       canHover={canHover}
-      className="h-full p-5 flex flex-col justify-between"
+      className="h-full p-4 sm:p-5 flex flex-col justify-between"
     >
       <div>
         {/* CVE ID + Severity */}
@@ -310,18 +310,18 @@ export function HallOfFameSection({ items, cves }: HallOfFameSectionProps) {
 
   return (
     <section
-      className="mx-auto mt-24 max-w-6xl px-4 sm:px-6"
+      className="mx-auto mt-16 sm:mt-24 max-w-6xl px-4 sm:px-6"
       aria-labelledby="hof-heading"
     >
       {/* Section Header */}
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--border)] pb-5">
+      <div className="mb-6 sm:mb-8 flex flex-wrap items-end justify-between gap-3 sm:gap-4 border-b border-[var(--border)] pb-4 sm:pb-5">
         <div>
           <div className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">
             02 · Hall of Fame &amp; CVEs
           </div>
           <h2
             id="hof-heading"
-            className="font-display mt-1.5 text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-[var(--text-primary)]"
+            className="font-display mt-1.5 text-2xl sm:text-4xl font-bold tracking-[-0.03em] text-[var(--text-primary)]"
           >
             Secured organizations &amp; CVEs
           </h2>
@@ -343,7 +343,7 @@ export function HallOfFameSection({ items, cves }: HallOfFameSectionProps) {
       {/* Unified Architectural Container */}
       <div className="surface-card overflow-hidden rounded-2xl">
         {/* Part A: Hall of Fame Logo Wall */}
-        <div className="p-5 sm:p-7">
+        <div className="p-4 sm:p-7">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <div className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
               <ShieldCheck className="h-3.5 w-3.5 text-[var(--accent)]" />
@@ -365,18 +365,18 @@ export function HallOfFameSection({ items, cves }: HallOfFameSectionProps) {
         <div className="h-px w-full bg-[var(--border)]" />
 
         {/* Part B: CVE Advisories Ledger */}
-        <div className="bg-[var(--bg-surface)]/45 p-5 sm:p-7">
+        <div className="bg-[var(--bg-surface)]/45 p-4 sm:p-7">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <div className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
               <Terminal className="h-3.5 w-3.5 text-[var(--mint)]" />
               <span>Assigned CVE Advisories</span>
             </div>
             <span className="font-mono text-[11px] text-[var(--text-muted)]">
-              Click ID to copy · Verified on CVE.org
+              Tap or click ID to copy · Verified on CVE.org
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3.5">
             {cves.map((cve) => (
               <CveCard key={cve.id} cve={cve} canHover={canHover} />
             ))}

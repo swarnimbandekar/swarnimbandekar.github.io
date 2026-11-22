@@ -143,13 +143,13 @@ export function HeroBadgeStage({
 
     const computeCardWidth = (w: number) =>
       w < 640
-        ? Math.max(308, Math.min(370, w - 20))
+        ? Math.max(288, Math.min(390, w - 24))
         : Math.max(520, Math.min(760, Math.round(w * 0.54)));
 
     let stageW = stageEl.clientWidth || window.innerWidth;
     let cardW = computeCardWidth(stageW);
     cardEl.style.width = `${cardW}px`;
-    let cardH = cardEl.offsetHeight || (stageW < 640 ? 435 : 465);
+    let cardH = cardEl.offsetHeight || (stageW < 640 ? 400 : 465);
     let initialLayout = computeStageLayout(stageW, cardW, cardH);
     let stageH = initialLayout.stageHeight;
     stageEl.style.height = `${stageH}px`;
@@ -256,6 +256,7 @@ export function HeroBadgeStage({
     let dragDist = 0;
     let lastClientX = 0;
     let lastClientY = 0;
+    let touchTap: { id: number; startX: number; startY: number } | null = null;
 
     const applyFaceVisibility = (angleDeg: number) => {
       const showingBack = angleDeg > 90;
@@ -286,6 +287,12 @@ export function HeroBadgeStage({
       const target = e.target as HTMLElement | null;
       if (target?.closest('a, button, [data-no-flip]')) return;
 
+      // On touch devices, keep native vertical scrolling unblocked and treat clean taps as card flips.
+      if (e.pointerType === 'touch') {
+        touchTap = { id: e.pointerId, startX: e.clientX, startY: e.clientY };
+        return;
+      }
+
       e.preventDefault();
       try {
         cardEl.setPointerCapture(e.pointerId);
@@ -313,6 +320,13 @@ export function HeroBadgeStage({
     };
 
     const onPointerMove = (e: PointerEvent) => {
+      if (touchTap && e.pointerId === touchTap.id) {
+        if (Math.hypot(e.clientX - touchTap.startX, e.clientY - touchTap.startY) > 10) {
+          touchTap = null;
+        }
+        return;
+      }
+
       if (drag.active) {
         const dx = e.clientX - lastClientX;
         const dy = e.clientY - lastClientY;
@@ -334,6 +348,8 @@ export function HeroBadgeStage({
         return;
       }
 
+      if (e.pointerType !== 'mouse') return;
+
       const rect = cardEl.getBoundingClientRect();
       if (
         e.clientX >= rect.left &&
@@ -351,6 +367,21 @@ export function HeroBadgeStage({
     };
 
     const finishPointer = (e: PointerEvent) => {
+      if (touchTap && e.pointerId === touchTap.id) {
+        const { startX, startY } = touchTap;
+        touchTap = null;
+        if (e.type === 'pointerup') {
+          const moved = Math.hypot(e.clientX - startX, e.clientY - startY);
+          const target = e.target as HTMLElement | null;
+          if (moved < 10 && !target?.closest('a, button, [data-no-flip]')) {
+            const rect = cardEl.getBoundingClientRect();
+            const relX = e.clientX - (rect.left + rect.width * 0.5);
+            triggerFlip(relX >= 0 ? 1 : -1);
+          }
+        }
+        return;
+      }
+
       if (!drag.active) return;
       try {
         cardEl.releasePointerCapture(e.pointerId);
@@ -535,7 +566,7 @@ export function HeroBadgeStage({
       {/* Elastic Physics Lanyard & Hanging Card Stage */}
       <div
         ref={stageRef}
-        className="badge-stage h-[690px] sm:h-[710px]"
+        className="badge-stage h-[600px] sm:h-[710px]"
       >
         <canvas
           ref={bgCanvasRef}
@@ -550,8 +581,8 @@ export function HeroBadgeStage({
           role="region"
           aria-label="Swarnim Bandekar interactive ID badge. Drag to swing or click card body to flip."
           onKeyDown={handleCardKeyDown}
-          style={{ transform: 'translate3d(calc(50vw - 50%), 165px, 0)' }}
-          className={`badge-card badge-perspective z-20 w-[356px] sm:w-[740px] ${
+          style={{ transform: 'translate3d(calc(50vw - 50%), 150px, 0)' }}
+          className={`badge-card badge-perspective z-20 w-[calc(100vw-24px)] max-w-[390px] sm:w-[740px] sm:max-w-none ${
             isDragging ? 'is-dragging' : ''
           }`}
         >
@@ -563,7 +594,7 @@ export function HeroBadgeStage({
             {/* ==================== FRONT FACE ==================== */}
             <div
               ref={frontFaceRef}
-              className="badge-face badge-face-front flex flex-col justify-between p-5 pt-7 sm:p-9 sm:pt-10 min-h-[415px] sm:min-h-[455px]"
+              className="badge-face badge-face-front flex flex-col justify-between p-4 pt-6 sm:p-9 sm:pt-10 min-h-[380px] sm:min-h-[455px]"
             >
               <div className="badge-dots pointer-events-none absolute inset-0" />
               <div
@@ -573,13 +604,13 @@ export function HeroBadgeStage({
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/30 to-transparent" />
 
               {/* Top Identity Row */}
-              <div className="relative z-10 flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-950 dark:text-white">
+              <div className="relative z-10 flex items-start justify-between gap-3 sm:gap-4">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <span className="font-mono text-[10.5px] sm:text-[11px] font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase text-zinc-950 dark:text-white">
                       {PROFILE.name}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/25 dark:border-emerald-400/25 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-medium text-emerald-700 dark:text-emerald-300">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/25 dark:border-emerald-400/25 bg-emerald-500/10 px-2 sm:px-2.5 py-0.5 font-mono text-[10px] font-medium text-emerald-700 dark:text-emerald-300">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                       available
                     </span>
@@ -607,8 +638,8 @@ export function HeroBadgeStage({
               </div>
 
               {/* Center Editorial Statement */}
-              <div className="relative z-10 my-6 sm:my-7">
-                <h1 className="font-display text-[clamp(1.6rem,3.05vw,2.55rem)] font-bold leading-[1.11] tracking-[-0.03em] text-zinc-950 dark:text-white">
+              <div className="relative z-10 my-5 sm:my-7">
+                <h1 className="font-display text-[clamp(1.45rem,5.8vw,2rem)] sm:text-[clamp(1.6rem,3.05vw,2.55rem)] font-bold leading-[1.12] tracking-[-0.03em] text-zinc-950 dark:text-white">
                   Hi, I’m Swarnim.{' '}
                   <span className="block sm:inline">
                     Offensive security researcher - I{' '}
@@ -617,21 +648,22 @@ export function HeroBadgeStage({
                     </span>
                   </span>
                 </h1>
-                <p className="mt-3.5 max-w-[58ch] text-[13.5px] sm:text-[15.5px] leading-relaxed text-zinc-700 dark:text-zinc-300/90">
+                <p className="mt-3 sm:mt-3.5 max-w-[58ch] text-[13px] sm:text-[15.5px] leading-relaxed text-zinc-700 dark:text-zinc-300/90">
                   Focused on web &amp; API penetration testing, Active Directory red teaming, info-stealer forensics, and engineering fast open-source security tooling.
                 </p>
               </div>
 
               {/* Bottom Chips + Subtle Card-Click Hint */}
-              <div className="relative z-10 flex flex-wrap items-center justify-between gap-2.5 border-t border-zinc-200 dark:border-white/10 pt-4">
+              <div className="relative z-10 flex flex-wrap items-center justify-between gap-2.5 border-t border-zinc-200 dark:border-white/10 pt-3.5 sm:pt-4">
                 <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                  <span className="inline-flex rounded-full border border-zinc-200/80 dark:border-white/10 px-3 py-1 font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className="inline-flex rounded-full border border-zinc-200/80 dark:border-white/10 px-2.5 sm:px-3 py-1 font-mono text-[10.5px] sm:text-[11px] text-zinc-500 dark:text-zinc-400">
                     @dirtrav · pixy
                   </span>
                 </div>
 
-                <span className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
-                  click card to flip ↻
+                <span className="font-mono text-[10.5px] sm:text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className="sm:hidden">tap card to flip ↻</span>
+                  <span className="hidden sm:inline">click card to flip ↻</span>
                 </span>
               </div>
             </div>
@@ -639,7 +671,7 @@ export function HeroBadgeStage({
             {/* ==================== BACK FACE ==================== */}
             <div
               ref={backFaceRef}
-              className="badge-face badge-face-back flex flex-col justify-between p-5 pt-7 sm:p-9 sm:pt-10 min-h-[415px] sm:min-h-[455px]"
+              className="badge-face badge-face-back flex flex-col justify-between p-4 pt-6 sm:p-9 sm:pt-10 min-h-[380px] sm:min-h-[455px]"
             >
               <div className="badge-dots pointer-events-none absolute inset-0 opacity-45" />
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/30 to-transparent" />
@@ -676,7 +708,7 @@ export function HeroBadgeStage({
                   ref={heatmapScrollRef}
                   data-no-flip="true"
                   onMouseLeave={() => setHoveredDay(null)}
-                  className="relative z-10 mt-3 rounded-xl border border-zinc-200/90 dark:border-white/10 bg-zinc-100/80 dark:bg-white/[0.03] px-2.5 py-2.5 sm:px-4 sm:py-3.5 overflow-x-auto no-scrollbar"
+                  className="relative z-10 mt-3 rounded-xl border border-zinc-200/90 dark:border-white/10 bg-zinc-100/80 dark:bg-white/[0.03] px-2.5 py-2.5 sm:px-4 sm:py-3.5 overflow-x-auto no-scrollbar touch-pan-x"
                 >
                   <div className="flex min-w-max sm:min-w-0 sm:w-full justify-between gap-[2.5px] sm:gap-[3.5px]">
                     {contributions.weeks.map((week, wIdx) => (
@@ -775,26 +807,26 @@ export function HeroBadgeStage({
               </div>
 
               {/* Bottom Directory Links + Spotify Now Playing */}
-              <div className="relative z-10 mt-5">
-                <div className="grid grid-cols-1 sm:grid-cols-[auto_minmax(0,1fr)] gap-4 items-end">
-                  <div className="flex flex-col gap-1.5 font-sans text-xs sm:text-[13px] font-medium">
+              <div className="relative z-10 mt-4 sm:mt-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[auto_minmax(0,1fr)] gap-3 sm:gap-4 items-end">
+                  <div className="flex flex-row flex-wrap gap-x-4 gap-y-1.5 sm:flex-col sm:gap-1.5 font-sans text-xs sm:text-[13px] font-medium">
                     <Link
                       href="/projects"
-                      className="inline-flex w-fit items-center gap-2 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white transition-colors"
+                      className="inline-flex w-fit items-center gap-1.5 sm:gap-2 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white transition-colors"
                     >
                       <ArrowRight className="h-3.5 w-3.5 text-zinc-400 dark:text-zinc-500" />
                       <span>projects</span>
                     </Link>
                     <Link
                       href="/resume"
-                      className="inline-flex w-fit items-center gap-2 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white transition-colors"
+                      className="inline-flex w-fit items-center gap-1.5 sm:gap-2 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white transition-colors"
                     >
                       <ArrowRight className="h-3.5 w-3.5 text-zinc-400 dark:text-zinc-500" />
                       <span>resume</span>
                     </Link>
                     <Link
                       href="/blog"
-                      className="inline-flex w-fit items-center gap-2 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white transition-colors"
+                      className="inline-flex w-fit items-center gap-1.5 sm:gap-2 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white transition-colors"
                     >
                       <ArrowRight className="h-3.5 w-3.5 text-zinc-400 dark:text-zinc-500" />
                       <span>writing</span>
@@ -803,7 +835,7 @@ export function HeroBadgeStage({
                       href="/llms.txt"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-fit items-center gap-2 font-mono text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition-colors"
+                      className="inline-flex w-fit items-center gap-1.5 sm:gap-2 font-mono text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition-colors"
                     >
                       <FileText className="h-3.5 w-3.5 text-zinc-400 dark:text-zinc-500" />
                       <span>llms.txt</span>
@@ -832,9 +864,12 @@ export function HeroBadgeStage({
                   </div>
                 </div>
 
-                <div className="mt-4 flex items-center justify-between border-t border-zinc-200 dark:border-white/10 pt-3 font-mono text-[11px]">
-                  <span className="text-zinc-600 dark:text-zinc-400 font-medium">{PROFILE.name}</span>
-                  <span className="text-zinc-500">click card to flip back ↻</span>
+                <div className="mt-3.5 sm:mt-4 flex items-center justify-between gap-2 border-t border-zinc-200 dark:border-white/10 pt-3 font-mono text-[10.5px] sm:text-[11px]">
+                  <span className="truncate text-zinc-600 dark:text-zinc-400 font-medium">{PROFILE.name}</span>
+                  <span className="shrink-0 text-zinc-500">
+                    <span className="sm:hidden">tap to flip back ↻</span>
+                    <span className="hidden sm:inline">click card to flip back ↻</span>
+                  </span>
                 </div>
               </div>
             </div>

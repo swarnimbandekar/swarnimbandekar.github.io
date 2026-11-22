@@ -73,7 +73,8 @@ export function ProjectsExplorer({
               Featured
             </h2>
             <span className="font-mono text-[11px] text-[var(--text-muted)]">
-              click card to expand
+              <span className="sm:hidden">tap card to expand</span>
+              <span className="hidden sm:inline">click card to expand</span>
             </span>
           </div>
           <MinimalProjectsRow projects={featuredProjects} initialStars={initialStars} />

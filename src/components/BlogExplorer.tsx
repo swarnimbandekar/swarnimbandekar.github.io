@@ -95,7 +95,7 @@ export function BlogExplorer({ posts }: { posts: BlogPostMeta[] }) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search writeups or tags..."
             aria-label="Search writeups"
-            className="w-full rounded-full border border-[var(--border)] bg-[var(--bg-elevated)] py-2 pl-9 pr-4 font-sans text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none focus:border-[var(--accent-border)]"
+            className="w-full rounded-full border border-[var(--border)] bg-[var(--bg-elevated)] py-2 pl-9 pr-4 font-sans text-base sm:text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none focus:border-[var(--accent-border)]"
           />
         </div>
       </div>
@@ -144,7 +144,7 @@ export function BlogExplorer({ posts }: { posts: BlogPostMeta[] }) {
                     </div>
                   </div>
 
-                  <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-4 shrink-0">
+                  <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-3 sm:gap-4 shrink-0">
                     {post.cover && (
                       <img
                         src={post.cover}
@@ -152,10 +152,10 @@ export function BlogExplorer({ posts }: { posts: BlogPostMeta[] }) {
                         width={176}
                         height={106}
                         loading="lazy"
-                        className="h-24 w-40 rounded-xl border border-[var(--border)] object-cover"
+                        className="h-20 w-32 sm:h-24 sm:w-40 rounded-xl border border-[var(--border)] object-cover"
                       />
                     )}
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-strong)] text-[var(--text-muted)] transition-all group-hover:border-[var(--accent-border)] group-hover:bg-[var(--accent)] group-hover:text-white">
+                    <span className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full border border-[var(--border-strong)] text-[var(--text-muted)] transition-all group-hover:border-[var(--accent-border)] group-hover:bg-[var(--accent)] group-hover:text-white">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </div>

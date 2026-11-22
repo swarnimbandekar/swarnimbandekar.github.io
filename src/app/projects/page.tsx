@@ -13,9 +13,9 @@ export default async function ProjectsPage() {
   const repoStars = await getGitHubRepoStars();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-28 pb-16">
-      <header className="mb-10 border-b border-[var(--border)] pb-6">
-        <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-[-0.035em] text-[var(--text-primary)]">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-24 sm:pt-28 pb-14 sm:pb-16">
+      <header className="mb-8 sm:mb-10 border-b border-[var(--border)] pb-5 sm:pb-6">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-[var(--text-primary)]">
           Things I&apos;ve shipped
         </h1>
         <div className="mt-2.5 flex flex-wrap items-center justify-between gap-4">

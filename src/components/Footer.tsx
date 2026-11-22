@@ -19,29 +19,29 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative z-10 mt-24 border-t border-[var(--border)] bg-[var(--bg-elevated)]/85 backdrop-blur-md no-print">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-[var(--border)]">
+    <footer className="relative z-10 mt-16 sm:mt-24 border-t border-[var(--border)] bg-[var(--bg-elevated)]/85 backdrop-blur-md no-print">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-12 pb-20 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-[var(--border)]">
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
               Let’s talk · {PROFILE.location}
             </div>
-            <h2 className="font-display mt-3 text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-[var(--text-primary)] leading-[1.12]">
+            <h2 className="font-display mt-3 text-2xl sm:text-4xl font-bold tracking-[-0.03em] text-[var(--text-primary)] leading-[1.12]">
               Open for security engineering, red-team roles, and interesting builds.
             </h2>
             <p className="mt-3 max-w-xl text-sm sm:text-[15px] text-[var(--text-secondary)] leading-relaxed">
               Whether you’re hiring, want to collaborate on offensive tooling, or want to compare notes on a weird bug - my inbox and DMs are open.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center gap-2.5 sm:gap-3">
               <button
                 type="button"
                 onClick={copyEmail}
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--text-primary)] px-4.5 py-2.5 font-sans text-xs font-medium text-[var(--bg)] transition-transform hover:-translate-y-0.5 cursor-pointer"
+                className="inline-flex max-w-full items-center gap-2 rounded-full bg-[var(--text-primary)] px-4 sm:px-4.5 py-2.5 font-sans text-xs font-medium text-[var(--bg)] transition-transform hover:-translate-y-0.5 cursor-pointer"
               >
-                {copied ? <Check className="h-3.5 w-3.5 text-emerald-500 dark:text-[#34d399]" /> : <Copy className="h-3.5 w-3.5" />}
-                <span>{copied ? 'Email copied' : PROFILE.email}</span>
+                {copied ? <Check className="h-3.5 w-3.5 shrink-0 text-emerald-500 dark:text-[#34d399]" /> : <Copy className="h-3.5 w-3.5 shrink-0" />}
+                <span className="truncate">{copied ? 'Email copied' : PROFILE.email}</span>
               </button>
               <Link
                 href="/resume"

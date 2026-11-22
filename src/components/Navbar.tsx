@@ -31,6 +31,15 @@ export function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [mobileOpen]);
+
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 28);
   });
@@ -133,7 +142,7 @@ export function Navbar() {
             type="button"
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
             aria-label="Toggle dark or light theme"
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text-primary)] cursor-pointer"
+            className="flex h-9 w-9 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text-primary)] cursor-pointer"
           >
             {mounted ? (
               resolvedTheme === 'dark' ? (
@@ -151,7 +160,7 @@ export function Navbar() {
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label="Toggle mobile menu"
             aria-expanded={mobileOpen}
-            className="flex md:hidden h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-secondary)] cursor-pointer"
+            className="flex md:hidden h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-secondary)] cursor-pointer"
           >
             {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -161,52 +170,63 @@ export function Navbar() {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-2 max-w-md rounded-2xl border border-[var(--border-strong)] bg-[var(--bg-elevated)] p-3 shadow-2xl md:hidden"
-          >
-            <nav className="grid grid-cols-2 gap-1.5">
-              {[...NAV_ITEMS, { href: '/contact', label: 'contact' }].map((item) => {
-                const active = isActive(item.href);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`rounded-xl border px-3.5 py-2.5 font-sans text-[13px] transition-colors ${
-                      active
-                        ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--text-primary)] font-semibold'
-                        : 'border-[var(--border)] font-medium text-[var(--text-secondary)] hover:border-[var(--border-strong)]'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-            <div className="mt-2.5 flex items-center justify-between border-t border-[var(--border)] pt-2.5 px-1">
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileOpen(false);
-                  openPalette();
-                }}
-                className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)]"
-              >
-                <Search className="h-3.5 w-3.5" /> Search everything
-              </button>
-              <a
-                href="/llms.txt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-xs text-[var(--text-muted)]"
-              >
-                llms.txt ↗
-              </a>
-            </div>
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.16 }}
+              onClick={() => setMobileOpen(false)}
+              aria-hidden="true"
+              className="fixed inset-0 -z-10 bg-black/25 backdrop-blur-[2px] md:hidden"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -8, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.98 }}
+              transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto mt-2 max-w-md rounded-2xl border border-[var(--border-strong)] bg-[var(--bg-elevated)] p-3 shadow-2xl md:hidden"
+            >
+              <nav className="grid grid-cols-2 gap-1.5">
+                {[...NAV_ITEMS, { href: '/contact', label: 'contact' }].map((item) => {
+                  const active = isActive(item.href);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`rounded-xl border px-3.5 py-3 font-sans text-sm transition-colors ${
+                        active
+                          ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--text-primary)] font-semibold'
+                          : 'border-[var(--border)] font-medium text-[var(--text-secondary)] hover:border-[var(--border-strong)]'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+              <div className="mt-2.5 flex items-center justify-between border-t border-[var(--border)] pt-2.5 px-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    openPalette();
+                  }}
+                  className="inline-flex items-center gap-1.5 py-1.5 font-mono text-xs text-[var(--text-muted)]"
+                >
+                  <Search className="h-3.5 w-3.5" /> Search everything
+                </button>
+                <a
+                  href="/llms.txt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-1.5 font-mono text-xs text-[var(--text-muted)]"
+                >
+                  llms.txt ↗
+                </a>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

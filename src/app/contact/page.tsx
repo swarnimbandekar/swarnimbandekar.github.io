@@ -49,12 +49,12 @@ const CHANNELS = [
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-28 pb-10">
-      <header className="mb-10 border-b border-[var(--border)] pb-8">
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-24 sm:pt-28 pb-10">
+      <header className="mb-8 sm:mb-10 border-b border-[var(--border)] pb-6 sm:pb-8">
         <div className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">
           Contact
         </div>
-        <h1 className="font-display mt-2 text-4xl sm:text-5xl font-bold tracking-[-0.035em] text-[var(--text-primary)]">
+        <h1 className="font-display mt-2 text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-[var(--text-primary)]">
           Let’s talk shop
         </h1>
         <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-[var(--text-secondary)]">

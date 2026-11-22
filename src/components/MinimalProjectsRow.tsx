@@ -70,10 +70,10 @@ function MinimalProjectCard({
       onPointerMove={handlePointerMove}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      className={`group relative flex flex-col justify-between min-w-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 shadow-[0_2px_12px_-4px_rgba(15,23,42,0.06)] dark:shadow-none hover:border-[var(--border-strong)] transition-[flex-grow,border-color,background-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] ${
+      className={`group relative flex flex-col justify-between min-w-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-4 sm:p-5 shadow-[0_2px_12px_-4px_rgba(15,23,42,0.06)] dark:shadow-none hover:border-[var(--border-strong)] transition-[flex-grow,border-color,background-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] ${
         isExpanded
-          ? 'min-h-[260px] h-auto lg:h-[400px] lg:flex-[3.2]'
-          : 'min-h-[260px] lg:h-[400px] lg:flex-1'
+          ? 'min-h-[240px] h-auto lg:h-[400px] lg:flex-[3.2]'
+          : 'min-h-[156px] sm:min-h-[180px] lg:min-h-[260px] lg:h-[400px] lg:flex-1'
       }`}
     >
       {/* Pointer-tracked 1px optical spotlight border */}
@@ -123,13 +123,13 @@ function MinimalProjectCard({
 
       {/* Center content: collapsed vs expanded */}
       {!isExpanded ? (
-        <div className="relative z-10 flex-1 flex flex-col justify-center py-6 min-w-0">
+        <div className="relative z-10 flex-1 flex flex-col justify-center py-4 lg:py-6 min-w-0">
           <h3 className="font-display text-lg sm:text-[21px] font-bold tracking-[-0.025em] text-[var(--text-primary)] truncate transition-colors group-hover:text-[var(--accent)]">
             {project.title}
           </h3>
           {project.stack.length > 0 && (
-            <div className="mt-2.5 flex items-center gap-2 min-w-0">
-              <span className="rounded border border-[var(--border)] bg-[var(--bg-surface)] px-2 py-0.5 font-mono text-[11px] text-[var(--text-secondary)] truncate max-w-[130px]">
+            <div className="mt-2 sm:mt-2.5 flex items-center gap-2 min-w-0">
+              <span className="rounded border border-[var(--border)] bg-[var(--bg-surface)] px-2 py-0.5 font-mono text-[11px] text-[var(--text-secondary)] truncate max-w-[160px] sm:max-w-[130px]">
                 {project.stack[0]}
               </span>
               {project.stack.length > 1 && (
@@ -146,10 +146,10 @@ function MinimalProjectCard({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.22, delay: 0.08 }}
-          className="relative z-10 flex-1 flex flex-col justify-between py-5 min-w-0 overflow-y-auto no-scrollbar"
+          className="relative z-10 flex-1 flex flex-col justify-between py-4 sm:py-5 min-w-0 overflow-y-auto no-scrollbar"
         >
           <div>
-            <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)]">
+            <h3 className="font-display text-xl sm:text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)]">
               {project.title}
             </h3>
             <p className="mt-2 text-sm sm:text-[15px] leading-relaxed text-[var(--text-primary)]/90">
@@ -163,7 +163,7 @@ function MinimalProjectCard({
             <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
               DETAILS
             </div>
-            <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[var(--text-secondary)] line-clamp-3">
+            <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[var(--text-secondary)] lg:line-clamp-3">
               {project.description}
             </p>
 

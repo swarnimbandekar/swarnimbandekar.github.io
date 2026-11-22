@@ -128,7 +128,7 @@ export function CursorCraftButton() {
       data-swarm-ignore="true"
       aria-label="Rebuild this page with CursorCraft"
       title="Watch a swarm of multiplayer cursors rebuild this page live"
-      className={`no-print fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-glass)] px-3.5 py-2 font-sans text-xs font-medium text-[var(--text-primary)] shadow-[0_8px_28px_-8px_rgba(9,9,11,0.22)] dark:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.75)] backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-border)] hover:shadow-[0_12px_30px_-8px_rgba(79,70,229,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] cursor-pointer select-none ${
+      className={`no-print fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-glass)] px-3 py-2 sm:px-3.5 sm:py-2 font-sans text-[11px] sm:text-xs font-medium text-[var(--text-primary)] shadow-[0_8px_28px_-8px_rgba(9,9,11,0.22)] dark:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.75)] backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-border)] hover:shadow-[0_12px_30px_-8px_rgba(79,70,229,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] cursor-pointer select-none ${
         running ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100 scale-100'
       }`}
     >
