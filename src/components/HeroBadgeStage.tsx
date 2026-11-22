@@ -774,9 +774,9 @@ export function HeroBadgeStage({
                 </div>
               </div>
 
-              {/* Bottom Directory Links + Signature */}
+              {/* Bottom Directory Links + Spotify Now Playing */}
               <div className="relative z-10 mt-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                <div className="grid grid-cols-1 sm:grid-cols-[auto_minmax(0,1fr)] gap-4 items-end">
                   <div className="flex flex-col gap-1.5 font-sans text-xs sm:text-[13px] font-medium">
                     <Link
                       href="/projects"
@@ -810,8 +810,25 @@ export function HeroBadgeStage({
                     </a>
                   </div>
 
-                  <div className="hidden sm:block border-t border-zinc-200 dark:border-white/10 pt-3 text-right font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
-                    <div className="text-zinc-400 dark:text-zinc-500">{PROFILE.email}</div>
+                  <div className="flex flex-col sm:items-end gap-2">
+                    <a
+                      href="https://spotify.swarnimbandekar.in/now-playing?uid=b6d1c197e7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full max-w-[300px] overflow-hidden rounded-xl transition-transform hover:scale-[1.01]"
+                    >
+                      <img
+                        src="https://spotify.swarnimbandekar.in/now-playing?uid=b6d1c197e7"
+                        alt="Spotify Now Playing"
+                        width={350}
+                        height={114}
+                        draggable={false}
+                        className="block h-auto w-full"
+                      />
+                    </a>
+                    <div className="hidden sm:block text-right font-mono text-[11px] text-zinc-400 dark:text-zinc-500">
+                      {PROFILE.email}
+                    </div>
                   </div>
                 </div>
 
